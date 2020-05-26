@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LPRIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.95.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.95.3\lib\net46\ClosedXML.dll</HintPath>
@@ -84,10 +87,12 @@
     <Compile Include="BaseTask.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DataStruct.cs" />
     <Compile Include="DateUtil.cs" />
     <Compile Include="Delegates.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ExcelUtil.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +109,7 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextUtil.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +145,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\icon-debug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\icon-load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\icon-excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LPRIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -28,8 +29,8 @@ namespace LPRepo
         //private static DataGridForm _data_grid_form;
 
         //Taskのキャンセル
-        //private CancellationTokenSource token_src;
-        //private CancellationToken token;
+        private CancellationTokenSource token_src;
+        private CancellationToken token;
 
         //Errorバッファ
         private string error_buff;
@@ -87,13 +88,13 @@ namespace LPRepo
             if (ldr != null) ldr.shutdown();
         }
 
-
         //設定ボタンクリック
         private void openAsSettingButton_Click(object sender, EventArgs e)
         {
             showSettingsForm();
         }
 
+        //実装実験ボタンクリック
         private void debugButton_Click(object sender, EventArgs e)
         {
             load_wd();
@@ -105,6 +106,33 @@ namespace LPRepo
             ldr.logout();
             DateUtil.app_sleep(5);
             ldr.shutdown();
+        }
+
+        //サイトID読込クリック
+        private void projectIDLoadButton_Click(object sender, EventArgs e)
+        {
+            //CancellationTokenを発行
+            token_src = new CancellationTokenSource();
+            token = token_src.Token;
+            //処理実行
+            set_projectID_combo();
+        }
+
+        //フォームを閉じようとしたとき
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //destroy_child_form();
+            destroy_wd();
+        }
+
+        //Excel出力クリック
+        private void createSiteInfoBookButton_Click(object sender, EventArgs e)
+        {
+            //CancellationTokenを発行
+            token_src = new CancellationTokenSource();
+            token = token_src.Token;
+            //処理実行
+            create_site_info_book();
         }
     }
 }

@@ -53,5 +53,41 @@ namespace LPRepo
             return workDir;
         }
 
+
+        //デリゲート（タスクのキャンセル判定とキャンセル実行処理）
+        private delegate Boolean d_task_cancel();
+        private Boolean w_task_cancel()
+        {
+            Boolean flag = false;
+            if (token.IsCancellationRequested)
+            {
+                operationStatusReport.AppendText("処理をキャンセルします。（" + DateUtil.get_logtime() + "）" + "\r\n");
+                token_src.Dispose();
+                token_src = null;
+                if (ldr != null) ldr.logout();
+                operationStatusReport.AppendText("処理をキャンセルしLibraからログアウトしました。（" + DateUtil.get_logtime() + "）" + "\r\n");
+                flag = true;
+            }
+            return flag;
+        }
+
+        //デリゲート（メイン画面のサイトIDコンボセットアップ）
+        private delegate void d_set_projectID_combo(List<List<string>> data);
+        private void w_set_projectID_combo(List<List<string>> data)
+        {
+            List<projectIDComboItem> ListBoxItem = new List<projectIDComboItem>();
+            projectIDComboItem itm;
+            for (int i = 0; i < data.Count; i++)
+            {
+                List<string> col = (List<string>)data[i];
+                string text = col[0] + "  " + col[1];
+                itm = new projectIDComboItem(col[0], text);
+                ListBoxItem.Add(itm);
+            }
+            projectIDListBox.DisplayMember = "display_str";
+            projectIDListBox.ValueMember = "id_str";
+            projectIDListBox.DataSource = ListBoxItem;
+        }
+
     }
 }

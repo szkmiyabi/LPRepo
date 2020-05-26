@@ -29,8 +29,9 @@ namespace LPRepo
         private string pswd;
         private string _windowID;
         private string app_url = "https://jis2.infocreate.co.jp/libraplus/";
-        
         private string index_url = "https://jis2.infocreate.co.jp/libraplus/top";
+        private string working_site_url = "https://jis2.infocreate.co.jp/libraplus/site/list/0";
+        private string completed_site_url = "https://jis2.infocreate.co.jp/libraplus/site/list/1";
         /*private string rep_index_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report/projID/";
         private string rep_detail_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report2/projID/";
         private string sv_mainpage_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/index/projID/";
@@ -174,6 +175,12 @@ namespace LPRepo
             _wd.Navigate().GoToUrl(app_url);
         }
 
+        //検査中サイト一覧画面に遷移
+        public void working_site_page()
+        {
+            _wd.Navigate().GoToUrl(working_site_url);
+        }
+
         //シャットダウン
         public void shutdown()
         {
@@ -218,6 +225,59 @@ namespace LPRepo
                 }
             }
 
+        }
+
+        //サイト一覧を取得
+        public List<List<string>> get_site_list()
+        {
+            List<List<string>> data = new List<List<string>>();
+            var tbl = _wd.FindElement(By.Id("myTable"));
+            var trs = tbl.FindElements(By.TagName("tr"));
+            int nx = trs.Count<IWebElement>();
+
+            for (int i = 1; i < nx; i++)
+            {
+                var tds = trs.ElementAt<IWebElement>(i).FindElements(By.TagName("td"));
+                List<string> row = new List<string>();
+                string td1 = TextUtil.text_clean(tds.ElementAt<IWebElement>(0).Text);
+                string td2 = TextUtil.text_clean(tds.ElementAt<IWebElement>(1).Text);
+                row.Add(td1);
+                row.Add(td2);
+                data.Add(row);
+            }
+            return data;
+        }
+
+        //サイトデータを取得
+        public List<List<string>> get_site_info_data()
+        {
+            List<List<string>> data = new List<List<string>>();
+            var tbl = _wd.FindElement(By.Id("myTable"));
+            var trs = tbl.FindElements(By.TagName("tr"));
+            int nx = trs.Count<IWebElement>();
+            for (int i = 1; i < nx; i++)
+            {
+                var tds = trs.ElementAt<IWebElement>(i).FindElements(By.TagName("td"));
+                List<string> row = new List<string>();
+                string id = TextUtil.text_clean(tds.ElementAt<IWebElement>(0).Text);
+                string name = TextUtil.text_clean(tds.ElementAt<IWebElement>(1).Text);
+                string orgname = TextUtil.text_clean(tds.ElementAt<IWebElement>(2).Text);
+                string groupname = TextUtil.text_clean(tds.ElementAt<IWebElement>(3).Text);
+                string startdate = TextUtil.text_clean(tds.ElementAt<IWebElement>(4).Text);
+                string enddate = TextUtil.text_clean(tds.ElementAt<IWebElement>(5).Text);
+                string urlcnt = TextUtil.text_clean(tds.ElementAt<IWebElement>(6).Text);
+                string status = TextUtil.text_clean(tds.ElementAt<IWebElement>(7).Text);
+                row.Add(id);
+                row.Add(name);
+                row.Add(orgname);
+                row.Add(groupname);
+                row.Add(startdate);
+                row.Add(enddate);
+                row.Add(urlcnt);
+                row.Add(status);
+                data.Add(row);
+            }
+            return data;
         }
     }
 }

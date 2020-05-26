@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -39,51 +40,58 @@
             this.label1 = new System.Windows.Forms.Label();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
             this.debugButton = new System.Windows.Forms.Button();
+            this.projectIDListBox = new System.Windows.Forms.ListBox();
+            this.projectIDLoadButton = new System.Windows.Forms.Button();
+            this.createSiteInfoBookButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.debugButton);
+            this.panel1.Controls.Add(this.createSiteInfoBookButton);
+            this.panel1.Controls.Add(this.projectIDLoadButton);
+            this.panel1.Controls.Add(this.projectIDListBox);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(211, 92);
+            this.panel1.Size = new System.Drawing.Size(219, 142);
             this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(229, 10);
+            this.panel2.Controls.Add(this.debugButton);
+            this.panel2.Location = new System.Drawing.Point(237, 10);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(403, 94);
+            this.panel2.Size = new System.Drawing.Size(395, 141);
             this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(12, 110);
+            this.panel3.Location = new System.Drawing.Point(12, 160);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(152, 110);
+            this.panel3.Size = new System.Drawing.Size(152, 60);
             this.panel3.TabIndex = 2;
             // 
             // panel4
             // 
-            this.panel4.Location = new System.Drawing.Point(170, 110);
+            this.panel4.Location = new System.Drawing.Point(170, 160);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(156, 110);
+            this.panel4.Size = new System.Drawing.Size(156, 60);
             this.panel4.TabIndex = 3;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.openAsSettingButton);
-            this.panel5.Location = new System.Drawing.Point(332, 110);
+            this.panel5.Location = new System.Drawing.Point(332, 160);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(300, 110);
+            this.panel5.Size = new System.Drawing.Size(300, 60);
             this.panel5.TabIndex = 4;
             // 
             // openAsSettingButton
             // 
-            this.openAsSettingButton.Location = new System.Drawing.Point(19, 63);
+            this.openAsSettingButton.Location = new System.Drawing.Point(24, 25);
             this.openAsSettingButton.Name = "openAsSettingButton";
             this.openAsSettingButton.Size = new System.Drawing.Size(32, 32);
             this.openAsSettingButton.TabIndex = 0;
@@ -126,12 +134,41 @@
             // 
             // debugButton
             // 
-            this.debugButton.Location = new System.Drawing.Point(42, 20);
+            this.debugButton.Location = new System.Drawing.Point(83, 49);
             this.debugButton.Name = "debugButton";
             this.debugButton.Size = new System.Drawing.Size(34, 33);
             this.debugButton.TabIndex = 0;
             this.debugButton.UseVisualStyleBackColor = true;
             this.debugButton.Click += new System.EventHandler(this.debugButton_Click);
+            // 
+            // projectIDListBox
+            // 
+            this.projectIDListBox.FormattingEnabled = true;
+            this.projectIDListBox.HorizontalScrollbar = true;
+            this.projectIDListBox.ItemHeight = 12;
+            this.projectIDListBox.Location = new System.Drawing.Point(10, 16);
+            this.projectIDListBox.Name = "projectIDListBox";
+            this.projectIDListBox.ScrollAlwaysVisible = true;
+            this.projectIDListBox.Size = new System.Drawing.Size(206, 88);
+            this.projectIDListBox.TabIndex = 0;
+            // 
+            // projectIDLoadButton
+            // 
+            this.projectIDLoadButton.Location = new System.Drawing.Point(10, 107);
+            this.projectIDLoadButton.Name = "projectIDLoadButton";
+            this.projectIDLoadButton.Size = new System.Drawing.Size(32, 32);
+            this.projectIDLoadButton.TabIndex = 1;
+            this.projectIDLoadButton.UseVisualStyleBackColor = true;
+            this.projectIDLoadButton.Click += new System.EventHandler(this.projectIDLoadButton_Click);
+            // 
+            // createSiteInfoBookButton
+            // 
+            this.createSiteInfoBookButton.Location = new System.Drawing.Point(76, 107);
+            this.createSiteInfoBookButton.Name = "createSiteInfoBookButton";
+            this.createSiteInfoBookButton.Size = new System.Drawing.Size(36, 32);
+            this.createSiteInfoBookButton.TabIndex = 2;
+            this.createSiteInfoBookButton.UseVisualStyleBackColor = true;
+            this.createSiteInfoBookButton.Click += new System.EventHandler(this.createSiteInfoBookButton_Click);
             // 
             // Form1
             // 
@@ -145,9 +182,12 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "LPRepo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
@@ -168,6 +208,9 @@
         public System.Windows.Forms.TextBox operationStatusReport;
         private System.Windows.Forms.Button openAsSettingButton;
         private System.Windows.Forms.Button debugButton;
+        private System.Windows.Forms.ListBox projectIDListBox;
+        private System.Windows.Forms.Button projectIDLoadButton;
+        private System.Windows.Forms.Button createSiteInfoBookButton;
     }
 }
 
