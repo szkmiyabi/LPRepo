@@ -167,5 +167,11 @@ namespace LPRepo
             sc.SaveAsFile(save_path, OpenQA.Selenium.ScreenshotImageFormat.Png);
             _wd.Manage().Window.Size = new System.Drawing.Size(1280, 900);
         }
+
+        //シャットダウン
+        public void shutdown()
+        {
+            _wd.Quit();
+        }
     }
 }

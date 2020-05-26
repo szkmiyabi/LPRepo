@@ -85,6 +85,7 @@
             this.openAsSettingButton.Size = new System.Drawing.Size(32, 32);
             this.openAsSettingButton.TabIndex = 0;
             this.openAsSettingButton.UseVisualStyleBackColor = true;
+            this.openAsSettingButton.Click += new System.EventHandler(this.openAsSettingButton_Click);
             // 
             // panel6
             // 
