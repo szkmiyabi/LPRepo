@@ -37,6 +37,8 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.openAsSettingButton = new System.Windows.Forms.Button();
+            this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +72,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.openAsSettingButton);
             this.panel5.Location = new System.Drawing.Point(332, 110);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(300, 110);
@@ -109,6 +112,14 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "処理状況";
             // 
+            // openAsSettingButton
+            // 
+            this.openAsSettingButton.Location = new System.Drawing.Point(57, 21);
+            this.openAsSettingButton.Name = "openAsSettingButton";
+            this.openAsSettingButton.Size = new System.Drawing.Size(47, 41);
+            this.openAsSettingButton.TabIndex = 0;
+            this.openAsSettingButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -123,6 +134,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "LPRepo";
+            this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.ResumeLayout(false);
@@ -140,6 +152,7 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox operationStatusReport;
+        private System.Windows.Forms.Button openAsSettingButton;
     }
 }
 

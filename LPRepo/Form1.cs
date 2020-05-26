@@ -19,6 +19,7 @@ namespace LPRepo
         public Form1()
         {
             InitializeComponent();
+
         }
 
         //Formのゲッターとセッター
