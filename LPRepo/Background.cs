@@ -166,6 +166,7 @@ namespace LPRepo
             //Bitmap excelImg = getImageFromResource("ico-excel-21.png");
             //Bitmap gridImg = getImageFromResource("ico-grid-21.png");
             //Bitmap loadImg = getImageFromResource("ico-load.png");
+            Bitmap debugImg = getImageFromResource("icon-debug.png");
             //openAsIEButton.Image = ieImg;
             //openAsFirefoxButton.Image = ffImg;
             //openAsChromeButton.Image = gcImg;
@@ -175,6 +176,7 @@ namespace LPRepo
             //projectIDLoadButton.Image = loadImg;
             //pageIDLoadButton.Image = loadImg;
             //techIDLoadButton.Image = loadImg;
+            debugButton.Image = debugImg;
         }
 
     }

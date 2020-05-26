@@ -38,12 +38,15 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
+            this.debugButton = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.debugButton);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(211, 92);
@@ -121,6 +124,15 @@
             this.operationStatusReport.Size = new System.Drawing.Size(604, 110);
             this.operationStatusReport.TabIndex = 0;
             // 
+            // debugButton
+            // 
+            this.debugButton.Location = new System.Drawing.Point(42, 20);
+            this.debugButton.Name = "debugButton";
+            this.debugButton.Size = new System.Drawing.Size(34, 33);
+            this.debugButton.TabIndex = 0;
+            this.debugButton.UseVisualStyleBackColor = true;
+            this.debugButton.Click += new System.EventHandler(this.debugButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -135,6 +147,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "LPRepo";
+            this.panel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
@@ -154,6 +167,7 @@
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox operationStatusReport;
         private System.Windows.Forms.Button openAsSettingButton;
+        private System.Windows.Forms.Button debugButton;
     }
 }
 

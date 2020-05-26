@@ -29,9 +29,9 @@ namespace LPRepo
         private string pswd;
         private string _windowID;
         private string app_url = "https://jis2.infocreate.co.jp/libraplus/";
-        /*
-        private string index_url = "https://jis.infocreate.co.jp/";
-        private string rep_index_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report/projID/";
+        
+        private string index_url = "https://jis2.infocreate.co.jp/libraplus/top";
+        /*private string rep_index_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report/projID/";
         private string rep_detail_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report2/projID/";
         private string sv_mainpage_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/index/projID/";
         private string completed_site_url = "https://jis.infocreate.co.jp/index/end/";
@@ -168,10 +168,56 @@ namespace LPRepo
             _wd.Manage().Window.Size = new System.Drawing.Size(1280, 900);
         }
 
+        //ホームページを開く
+        public void home()
+        {
+            _wd.Navigate().GoToUrl(app_url);
+        }
+
         //シャットダウン
         public void shutdown()
         {
             _wd.Quit();
+        }
+
+        //ログイン
+        public void login()
+        {
+            _wd.FindElement(By.Id("userid")).SendKeys(uid);
+            _wd.FindElement(By.Id("pw")).SendKeys(pswd);
+            var btns = _wd.FindElements(By.TagName("button"));
+            for(int i=0; i<btns.Count<IWebElement>(); i++)
+            {
+                IWebElement btn = btns.ElementAt<IWebElement>(i);
+                string attr = btn.GetAttribute("type");
+                string txt = btn.Text.TrimStart().TrimEnd();
+                if(attr == "submit" && txt == "ログイン")
+                {
+                    btn.Click();
+                    break;
+                }
+            }
+        }
+
+        //ログアウト
+        public void logout()
+        {
+            _wd.Navigate().GoToUrl(index_url);
+            DateUtil.app_sleep(shortWait);
+            IWebElement btnWrap = _wd.FindElement(By.Id("navbar-header"));
+            var btns = btnWrap.FindElements(By.TagName("button"));
+            for (int i = 0; i < btns.Count<IWebElement>(); i++)
+            {
+                IWebElement btn = btns.ElementAt<IWebElement>(i);
+                string attr = btn.GetAttribute("type");
+                string txt = btn.Text.TrimStart().TrimEnd();
+                if (attr == "button" && txt == "ログアウト")
+                {
+                    btn.Click();
+                    break;
+                }
+            }
+
         }
     }
 }
