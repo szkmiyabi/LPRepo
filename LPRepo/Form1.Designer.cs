@@ -33,11 +33,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.openAsSettingButton = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.operationStatusReport = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.openAsSettingButton = new System.Windows.Forms.Button();
+            this.operationStatusReport = new System.Windows.Forms.TextBox();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +78,14 @@
             this.panel5.Size = new System.Drawing.Size(300, 110);
             this.panel5.TabIndex = 4;
             // 
+            // openAsSettingButton
+            // 
+            this.openAsSettingButton.Location = new System.Drawing.Point(19, 63);
+            this.openAsSettingButton.Name = "openAsSettingButton";
+            this.openAsSettingButton.Size = new System.Drawing.Size(32, 32);
+            this.openAsSettingButton.TabIndex = 0;
+            this.openAsSettingButton.UseVisualStyleBackColor = true;
+            // 
             // panel6
             // 
             this.panel6.Location = new System.Drawing.Point(12, 226);
@@ -94,15 +102,6 @@
             this.panel7.Size = new System.Drawing.Size(615, 131);
             this.panel7.TabIndex = 6;
             // 
-            // operationStatusReport
-            // 
-            this.operationStatusReport.Location = new System.Drawing.Point(3, 18);
-            this.operationStatusReport.Multiline = true;
-            this.operationStatusReport.Name = "operationStatusReport";
-            this.operationStatusReport.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.operationStatusReport.Size = new System.Drawing.Size(604, 110);
-            this.operationStatusReport.TabIndex = 0;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -112,13 +111,14 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "処理状況";
             // 
-            // openAsSettingButton
+            // operationStatusReport
             // 
-            this.openAsSettingButton.Location = new System.Drawing.Point(57, 21);
-            this.openAsSettingButton.Name = "openAsSettingButton";
-            this.openAsSettingButton.Size = new System.Drawing.Size(47, 41);
-            this.openAsSettingButton.TabIndex = 0;
-            this.openAsSettingButton.UseVisualStyleBackColor = true;
+            this.operationStatusReport.Location = new System.Drawing.Point(3, 18);
+            this.operationStatusReport.Multiline = true;
+            this.operationStatusReport.Name = "operationStatusReport";
+            this.operationStatusReport.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.operationStatusReport.Size = new System.Drawing.Size(604, 110);
+            this.operationStatusReport.TabIndex = 0;
             // 
             // Form1
             // 

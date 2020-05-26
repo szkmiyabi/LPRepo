@@ -19,7 +19,8 @@ namespace LPRepo
         public Form1()
         {
             InitializeComponent();
-
+            //Imageボタンの初期化
+            imgButtonInit();
         }
 
         //Formのゲッターとセッター
