@@ -34,7 +34,9 @@ namespace LPRepo
         private string completed_site_url = "https://jis2.infocreate.co.jp/libraplus/site/list/1";
         /*private string rep_index_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report/projID/";
         private string rep_detail_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report2/projID/";
-        private string sv_mainpage_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/index/projID/";
+        */
+        private string sv_mainpage_url_base = "http://jis2.infocreate.co.jp/libraplus/inspect/start/index/";
+        /*
         private string completed_site_url = "https://jis.infocreate.co.jp/index/end/";
         private string certificated_site_url = "https://jis.infocreate.co.jp/index/rediagnose/";
         */
@@ -227,6 +229,19 @@ namespace LPRepo
 
         }
 
+        //検査メインページに移動
+        public void browse_sv_mainpage()
+        {
+            //basic認証の処理
+            if (_basic_auth_flag.Equals("yes") && _basic_authenicated == false)
+            {
+                d_messenger message = new d_messenger(w_messenger);
+                main_form.Invoke(message, "【お知らせ】基本認証オプションが有効化されています。ログインアラートで認証してください。");
+                _basic_authenicated = true;
+            }
+            _wd.Navigate().GoToUrl(sv_mainpage_url_base + _projectID);
+        }
+
         //サイト一覧を取得
         public List<List<string>> get_site_list()
         {
@@ -278,6 +293,51 @@ namespace LPRepo
                 data.Add(row);
             }
             return data;
+        }
+
+
+        //PID+URL一覧データを生成（検査メイン画面から）
+        public List<List<string>> get_page_list_data_from_svpage()
+        {
+            List<List<string>> data = new List<List<string>>();
+            var url_ddl = _wd.FindElement(By.Id("select_urlno"));
+            var opts = url_ddl.FindElements(By.TagName("option"));
+            for (int i = 0; i < opts.Count<IWebElement>(); i++)
+            {
+                IWebElement opt = opts.ElementAt<IWebElement>(i);
+                List<string> row = new List<string>();
+                //string v1 = opt.GetAttribute("value");
+                string v1 = _get_option_pidtext(opt);
+                string v2 = _get_option_urltext(opt);
+                row.Add(v1);
+                row.Add(v2);
+                data.Add(row);
+            }
+            return data;
+        }
+        private string _get_option_pidtext(IWebElement opt)
+        {
+            string ret = "";
+            string val = opt.Text;
+            Regex pt = new Regex(@"(\[)([a-zA-Z0-9\-]+)(\] )(.+)");
+            if (pt.IsMatch(val))
+            {
+                MatchCollection mc = pt.Matches(val);
+                ret = mc[0].Groups[2].Value;
+            }
+            return ret;
+        }
+        private string _get_option_urltext(IWebElement opt)
+        {
+            string ret = "";
+            string val = opt.Text;
+            Regex pt = new Regex(@"(\[[a-zA-Z0-9\-]+\] )(.+)");
+            if (pt.IsMatch(val))
+            {
+                MatchCollection mc = pt.Matches(val);
+                ret = mc[0].Groups[2].Value;
+            }
+            return ret;
         }
     }
 }

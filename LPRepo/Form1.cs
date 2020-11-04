@@ -134,5 +134,15 @@ namespace LPRepo
             //処理実行
             create_site_info_book();
         }
+
+        //ページID読込クリック
+        private void pageIDLoadButton_Click(object sender, EventArgs e)
+        {
+            //CancellationTokenを発行
+            token_src = new CancellationTokenSource();
+            token = token_src.Token;
+            //処理実行
+            set_pageID_combo();
+        }
     }
 }

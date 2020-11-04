@@ -158,14 +158,14 @@ namespace LPRepo
         //イメージボタン初期化
         private void imgButtonInit()
         {
-            //Bitmap ieImg = getImageFromResource("ie24.png");
-            //Bitmap ffImg = getImageFromResource("ff24.png");
-            //Bitmap gcImg = getImageFromResource("gc24.png");
-            //Bitmap folderImg = getImageFromResource("folder24.png");
-            Bitmap settingImg = getImageFromResource("icon-settings.png");
-            Bitmap excelImg = getImageFromResource("icon-excel.png");
-            //Bitmap gridImg = getImageFromResource("ico-grid-21.png");
-            Bitmap loadImg = getImageFromResource("icon-load.png");
+            Bitmap ieImg = getImageFromResource("ie24.png");
+            Bitmap ffImg = getImageFromResource("ff24.png");
+            Bitmap gcImg = getImageFromResource("gc24.png");
+            Bitmap folderImg = getImageFromResource("folder24.png");
+            Bitmap settingImg = getImageFromResource("setting24.png");
+            Bitmap excelImg = getImageFromResource("ico-excel-21.png");
+            Bitmap gridImg = getImageFromResource("ico-grid-21.png");
+            Bitmap loadImg = getImageFromResource("ico-load.png");
             Bitmap debugImg = getImageFromResource("icon-debug.png");
             //openAsIEButton.Image = ieImg;
             //openAsFirefoxButton.Image = ffImg;
@@ -174,7 +174,7 @@ namespace LPRepo
             openAsSettingButton.Image = settingImg;
             createSiteInfoBookButton.Image = excelImg;
             projectIDLoadButton.Image = loadImg;
-            //pageIDLoadButton.Image = loadImg;
+            pageIDLoadButton.Image = loadImg;
             //techIDLoadButton.Image = loadImg;
             debugButton.Image = debugImg;
         }

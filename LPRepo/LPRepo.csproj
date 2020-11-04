@@ -151,13 +151,15 @@
     <EmbeddedResource Include="resources\icon-debug.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="resources\icon-load.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="resources\icon-excel.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="LPRIcon.ico" />
+    <EmbeddedResource Include="resources\ff24.png" />
+    <EmbeddedResource Include="resources\folder24.png" />
+    <EmbeddedResource Include="resources\gc24.png" />
+    <EmbeddedResource Include="resources\ico-excel-21.png" />
+    <EmbeddedResource Include="resources\ico-grid-21.png" />
+    <EmbeddedResource Include="resources\ico-load.png" />
+    <EmbeddedResource Include="resources\ie24.png" />
+    <EmbeddedResource Include="resources\setting24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

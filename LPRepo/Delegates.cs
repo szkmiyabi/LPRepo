@@ -54,6 +54,15 @@ namespace LPRepo
         }
 
 
+        //デリゲート（プロジェクトID参照）
+        public delegate string d_get_projectID();
+        public string w_get_projectID()
+        {
+            return projectIDListBox.SelectedValue.ToString();
+        }
+
+
+
         //デリゲート（タスクのキャンセル判定とキャンセル実行処理）
         private delegate Boolean d_task_cancel();
         private Boolean w_task_cancel()
@@ -69,6 +78,51 @@ namespace LPRepo
                 flag = true;
             }
             return flag;
+        }
+
+        //デリゲート（コントロールの有効無効制御）
+        private delegate void d_ctrl_toggle(string ctrl_name);
+        private void ctrl_toggle(string ctrl_name)
+        {
+            List<Control> controls = GetAllControls<Control>(this);
+            foreach (var ctrl in controls)
+            {
+                if (ctrl.Name == ctrl_name)
+                {
+                    ctrl.Enabled = !ctrl.Enabled;
+                    break;
+                }
+            }
+        }
+
+        //デリゲート（コントロールの有効制御）
+        private delegate void d_ctrl_activate(string ctrl_name);
+        private void ctrl_activate(string ctrl_name)
+        {
+            List<Control> controls = GetAllControls<Control>(this);
+            foreach (var ctrl in controls)
+            {
+                if (ctrl.Name == ctrl_name)
+                {
+                    ctrl.Enabled = true;
+                    break;
+                }
+            }
+        }
+
+        //デリゲート（コントロールの無効制御）
+        private delegate void d_ctrl_deactivate(string ctrl_name);
+        private void ctrl_deactivate(string ctrl_name)
+        {
+            List<Control> controls = GetAllControls<Control>(this);
+            foreach (var ctrl in controls)
+            {
+                if (ctrl.Name == ctrl_name)
+                {
+                    ctrl.Enabled = false;
+                    break;
+                }
+            }
         }
 
         //デリゲート（メイン画面のサイトIDコンボセットアップ）
@@ -87,6 +141,27 @@ namespace LPRepo
             projectIDListBox.DisplayMember = "display_str";
             projectIDListBox.ValueMember = "id_str";
             projectIDListBox.DataSource = ListBoxItem;
+        }
+
+        //デリゲート（メイン画面のページIDコンボセットアップ）
+        private delegate void d_set_pageID_combo(List<List<string>> data);
+        private void w_set_pageID_combo(List<List<string>> data)
+        {
+            List<pageIDComboItem> ListBoxItem = new List<pageIDComboItem>();
+            pageIDComboItem itm;
+            for (int i = 0; i < data.Count; i++)
+            {
+                List<string> col = (List<string>)data[i];
+                string text = "[" + col[0] + "]  " + col[1];
+                itm = new pageIDComboItem(col[0], text);
+                ListBoxItem.Add(itm);
+            }
+            pageIDListBox.DisplayMember = "display_str";
+            pageIDListBox.ValueMember = "id_str";
+            pageIDListBox.DataSource = ListBoxItem;
+
+            SendMessage(pageIDListBox.Handle, LB_SETSEL, 0, -1);
+            pageIDListBox.SetSelected(0, false);
         }
 
     }
