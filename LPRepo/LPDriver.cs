@@ -339,5 +339,56 @@ namespace LPRepo
             }
             return ret;
         }
+
+        //カテゴリ一覧を取得（検査メイン画面から）
+        public List<string> get_category_list_data_from_svpage()
+        {
+            List<string> data = new List<string>();
+            var cat_list_wrap = _wd.FindElement(By.Id("tabs-category"));
+            var cat_list = cat_list_wrap.FindElements(By.TagName("li"));
+            for(int i=0; i<cat_list.Count<IWebElement>(); i++)
+            {
+                IWebElement li = cat_list.ElementAt<IWebElement>(i);
+                var atg = li.FindElement(By.TagName("a"));
+                string vl = _get_category_only_text(atg.Text);
+                data.Add(vl);
+            }
+            return data;
+        }
+        private string _get_category_only_text(string str)
+        {
+            string ret = "";
+            Regex pt = new Regex(@"(.+?)([0-9]+)");
+            if (pt.IsMatch(str))
+            {
+                MatchCollection mc = pt.Matches(str);
+                ret = mc[0].Groups[1].Value;
+            }
+            else
+            {
+                return str;
+            }
+            return ret;
+        }
+
+
+        //サイト名を取得
+        public string get_site_name()
+        {
+            string sname = "";
+            var tbls = _wd.FindElements(By.TagName("table"));
+            var tbl = tbls.ElementAt<IWebElement>(0);
+            var tds = tbl.FindElements(By.CssSelector("tr td"));
+            var td = tds.ElementAt<IWebElement>(0);
+            string td_val = TextUtil.text_clean(td.Text);
+            Regex pt = new Regex(@"(\[)([a-zA-Z0-9]+)(\])(\s*)(.+?)( / )");
+            if (pt.IsMatch(td_val))
+            {
+                Match mt = pt.Match(td_val);
+                sname = mt.Groups[5].Value;
+            }
+            return sname;
+        }
+
     }
 }

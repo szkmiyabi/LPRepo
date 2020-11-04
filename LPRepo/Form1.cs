@@ -144,5 +144,32 @@ namespace LPRepo
             //処理実行
             set_pageID_combo();
         }
+
+        private void doUrlTaksFormatTextButton_Click(object sender, EventArgs e)
+        {
+            //CancellationTokenを発行
+            token_src = new CancellationTokenSource();
+            token = token_src.Token;
+            //処理実行
+            do_create_pid_url_list();
+        }
+
+        private void doUrlTaksFormatExcelButton_Click(object sender, EventArgs e)
+        {
+            //CancellationTokenを発行
+            token_src = new CancellationTokenSource();
+            token = token_src.Token;
+            //処理実行
+            do_create_pid_url_list_xlsx();
+        }
+
+        private void doAsignListButton_Click(object sender, EventArgs e)
+        {
+            //CancellationTokenを発行
+            token_src = new CancellationTokenSource();
+            token = token_src.Token;
+            //処理実行
+            do_create_asignlist_xlsx();
+        }
     }
 }

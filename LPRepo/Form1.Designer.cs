@@ -49,6 +49,9 @@
             this.operationStatusReport = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.doUrlTaksFormatTextButton = new System.Windows.Forms.Button();
+            this.doUrlTaksFormatExcelButton = new System.Windows.Forms.Button();
+            this.doAsignListButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -106,6 +109,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.doAsignListButton);
+            this.panel2.Controls.Add(this.doUrlTaksFormatExcelButton);
+            this.panel2.Controls.Add(this.doUrlTaksFormatTextButton);
             this.panel2.Controls.Add(this.pageIDLoadButton);
             this.panel2.Controls.Add(this.pageIDListBox);
             this.panel2.Controls.Add(this.label3);
@@ -236,6 +242,35 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // doUrlTaksFormatTextButton
+            // 
+            this.doUrlTaksFormatTextButton.Location = new System.Drawing.Point(59, 119);
+            this.doUrlTaksFormatTextButton.Name = "doUrlTaksFormatTextButton";
+            this.doUrlTaksFormatTextButton.Size = new System.Drawing.Size(66, 33);
+            this.doUrlTaksFormatTextButton.TabIndex = 6;
+            this.doUrlTaksFormatTextButton.Text = "TSV保存";
+            this.doUrlTaksFormatTextButton.UseVisualStyleBackColor = true;
+            this.doUrlTaksFormatTextButton.Click += new System.EventHandler(this.doUrlTaksFormatTextButton_Click);
+            // 
+            // doUrlTaksFormatExcelButton
+            // 
+            this.doUrlTaksFormatExcelButton.Location = new System.Drawing.Point(132, 119);
+            this.doUrlTaksFormatExcelButton.Name = "doUrlTaksFormatExcelButton";
+            this.doUrlTaksFormatExcelButton.Size = new System.Drawing.Size(41, 34);
+            this.doUrlTaksFormatExcelButton.TabIndex = 7;
+            this.doUrlTaksFormatExcelButton.UseVisualStyleBackColor = true;
+            this.doUrlTaksFormatExcelButton.Click += new System.EventHandler(this.doUrlTaksFormatExcelButton_Click);
+            // 
+            // doAsignListButton
+            // 
+            this.doAsignListButton.Location = new System.Drawing.Point(179, 118);
+            this.doAsignListButton.Name = "doAsignListButton";
+            this.doAsignListButton.Size = new System.Drawing.Size(75, 34);
+            this.doAsignListButton.TabIndex = 8;
+            this.doAsignListButton.Text = "割当表";
+            this.doAsignListButton.UseVisualStyleBackColor = true;
+            this.doAsignListButton.Click += new System.EventHandler(this.doAsignListButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -287,6 +322,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button doUrlTaksFormatTextButton;
+        private System.Windows.Forms.Button doUrlTaksFormatExcelButton;
+        private System.Windows.Forms.Button doAsignListButton;
     }
 }
 

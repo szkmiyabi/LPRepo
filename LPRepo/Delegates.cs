@@ -164,5 +164,34 @@ namespace LPRepo
             pageIDListBox.SetSelected(0, false);
         }
 
+
+        //デリゲート（ページIDコンボが選択されているか）
+        private delegate Boolean d_is_pageID_selected();
+        private Boolean w_is_pageID_selected()
+        {
+            if (pageIDListBox.SelectedItems.Count == 0) return false;
+            else return true;
+        }
+
+
+        //デリゲート（ページIDコンボ選択値を取得）
+        private delegate List<List<string>> d_pageID_data();
+        private List<List<string>> w_pageID_data()
+        {
+            List<List<string>> data = new List<List<string>>();
+
+            //データバインドしたListBoxの項目はそのデータ型でしか取り出せない
+            foreach (pageIDComboItem cmb in pageIDListBox.SelectedItems)
+            {
+                List<string> row = new List<string>();
+                string pid = cmb.id_str;
+                string url = TextUtil.fetch_url(cmb.display_str);
+                row.Add(pid);
+                row.Add(url);
+                data.Add(row);
+            }
+            return data;
+        }
+
     }
 }

@@ -177,6 +177,8 @@ namespace LPRepo
             pageIDLoadButton.Image = loadImg;
             //techIDLoadButton.Image = loadImg;
             debugButton.Image = debugImg;
+
+            doUrlTaksFormatExcelButton.Image = excelImg;
         }
 
     }

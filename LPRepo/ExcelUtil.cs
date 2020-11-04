@@ -87,5 +87,69 @@ namespace LPRepo
 
         }
 
+        //作業割り当て表Excelファイル出力
+        public void save_asignlist_xlsx_as(List<List<string>> data, List<string> categories, string filename)
+        {
+            d_messenger message = new d_messenger(w_messenger);
+
+            try
+            {
+                using (var wb = new ClosedXML.Excel.XLWorkbook())
+                {
+                    var ws = wb.Worksheets.Add("Sheet1");
+
+                    //行のループ
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        List<string> row = (List<string>)data[i];
+
+                        //列のループ
+                        for (int j = 0; j < row.Count; j++)
+                        {
+                            string col = (string)row[j];
+                            ws.Cell(i + 1, j + 1).SetValue<string>(fetch_overflow_characters(col));
+                            ws.Cell(i + 1, j + 1).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Font.FontName = "ＭＳ Ｐゴシック";
+                            ws.Cell(i + 1, j + 1).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+
+                        }
+
+                        if(i == 0)
+                        {
+                            int maxcol = row.Count;
+                            for(int z=0; z<categories.Count; z++)
+                            {
+                                ws.Cell(i + 1, maxcol + (z + 1)).SetValue<string>((string)categories[z]);
+                                ws.Cell(i + 1, maxcol + (z + 1)).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                                ws.Cell(i + 1, maxcol + (z + 1)).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                                ws.Cell(i + 1, maxcol + (z + 1)).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                                ws.Cell(i + 1, maxcol + (z + 1)).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                                ws.Cell(i + 1, maxcol + (z + 1)).Style.Font.FontName = "ＭＳ Ｐゴシック";
+                                ws.Cell(i + 1, maxcol + (z + 1)).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                                ws.Cell(i + 1, maxcol + (z + 1)).Style.Alignment.TopToBottom = true;
+
+
+                            }
+                        }
+
+                    }
+
+                    wb.SaveAs(filename);
+                    main_form.Invoke(message, "保存に成功しました。（" + filename + "）");
+                }
+            }
+            catch (Exception ex)
+            {
+                main_form.Invoke(message, "【エラー】" + ex.Message);
+                return;
+            }
+
+
+
+        }
+
     }
 }
