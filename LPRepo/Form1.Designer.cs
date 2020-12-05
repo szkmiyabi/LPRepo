@@ -47,6 +47,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
+            this.openAsFolderButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -180,6 +181,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.openAsFolderButton);
             this.panel5.Controls.Add(this.debugButton);
             this.panel5.Controls.Add(this.openAsSettingButton);
             this.panel5.Location = new System.Drawing.Point(12, 186);
@@ -189,9 +191,9 @@
             // 
             // openAsSettingButton
             // 
-            this.openAsSettingButton.Location = new System.Drawing.Point(585, 17);
+            this.openAsSettingButton.Location = new System.Drawing.Point(531, 17);
             this.openAsSettingButton.Name = "openAsSettingButton";
-            this.openAsSettingButton.Size = new System.Drawing.Size(37, 38);
+            this.openAsSettingButton.Size = new System.Drawing.Size(35, 35);
             this.openAsSettingButton.TabIndex = 0;
             this.openAsSettingButton.UseVisualStyleBackColor = true;
             this.openAsSettingButton.Click += new System.EventHandler(this.openAsSettingButton_Click);
@@ -222,6 +224,15 @@
             this.operationStatusReport.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.operationStatusReport.Size = new System.Drawing.Size(704, 128);
             this.operationStatusReport.TabIndex = 0;
+            // 
+            // openAsFolderButton
+            // 
+            this.openAsFolderButton.Location = new System.Drawing.Point(572, 17);
+            this.openAsFolderButton.Name = "openAsFolderButton";
+            this.openAsFolderButton.Size = new System.Drawing.Size(35, 35);
+            this.openAsFolderButton.TabIndex = 1;
+            this.openAsFolderButton.UseVisualStyleBackColor = true;
+            this.openAsFolderButton.Click += new System.EventHandler(this.openAsFolderButton_Click);
             // 
             // Form1
             // 
@@ -267,6 +278,7 @@
         private System.Windows.Forms.Button doUrlTaksFormatTextButton;
         private System.Windows.Forms.Button doUrlTaksFormatExcelButton;
         private System.Windows.Forms.Button doAsignListButton;
+        private System.Windows.Forms.Button openAsFolderButton;
     }
 }
 

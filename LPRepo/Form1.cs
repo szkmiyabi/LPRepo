@@ -145,6 +145,7 @@ namespace LPRepo
             set_pageID_combo();
         }
 
+        //URL TSV出力ボタンクリック
         private void doUrlTaksFormatTextButton_Click(object sender, EventArgs e)
         {
             //CancellationTokenを発行
@@ -154,6 +155,7 @@ namespace LPRepo
             do_create_pid_url_list();
         }
 
+        //URL Excel出力ボタンクリック
         private void doUrlTaksFormatExcelButton_Click(object sender, EventArgs e)
         {
             //CancellationTokenを発行
@@ -163,6 +165,7 @@ namespace LPRepo
             do_create_pid_url_list_xlsx();
         }
 
+        //割り当て表作成ボタンクリック
         private void doAsignListButton_Click(object sender, EventArgs e)
         {
             //CancellationTokenを発行
@@ -170,6 +173,12 @@ namespace LPRepo
             token = token_src.Token;
             //処理実行
             do_create_asignlist_xlsx();
+        }
+
+        //作業フォルダボタンクリック
+        private void openAsFolderButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(workDir);
         }
     }
 }

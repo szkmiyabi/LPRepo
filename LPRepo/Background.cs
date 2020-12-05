@@ -177,6 +177,7 @@ namespace LPRepo
             doUrlTaksFormatExcelButton.Image = excelImg;
             doUrlTaksFormatTextButton.Image = tsvImg;
             doAsignListButton.Image = grpImg;
+            openAsFolderButton.Image = folderImg;
         }
 
     }
