@@ -156,6 +156,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LPRIcon.ico" />
+    <EmbeddedResource Include="resources\ico-group.png" />
+    <EmbeddedResource Include="resources\ico-tsv.png" />
     <EmbeddedResource Include="resources\ff24.png" />
     <EmbeddedResource Include="resources\folder24.png" />
     <EmbeddedResource Include="resources\gc24.png" />
