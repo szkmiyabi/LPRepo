@@ -10,8 +10,8 @@ namespace LPRepo
     partial class Form1
     {
         //デリゲート（Libraドライバの起動とエラー処理）
-        private delegate Boolean d_ldr_activate();
-        private Boolean w_ldr_activate()
+        private delegate Boolean _ldr_activate();
+        private Boolean ldr_activate()
         {
             if (load_wd())
             {
@@ -40,32 +40,29 @@ namespace LPRepo
         }
 
         //デリゲート（処理状況テキストの更新）
-        public delegate void d_status_messenger(string msg);
-        public void w_status_messenger(string msg)
+        public delegate void _write_log(string msg);
+        public void write_log(string msg)
         {
             operationStatusReport.AppendText(msg + "\r\n");
         }
 
         //デリゲート（保存先フォルダ参照）
-        public delegate string d_get_workDir();
-        public string w_get_workDir()
+        public delegate string _get_workDir();
+        public string get_workDir()
         {
             return workDir;
         }
 
-
         //デリゲート（プロジェクトID参照）
-        public delegate string d_get_projectID();
-        public string w_get_projectID()
+        public delegate string _get_projectID();
+        public string get_projectID()
         {
             return projectIDListBox.SelectedValue.ToString();
         }
 
-
-
         //デリゲート（タスクのキャンセル判定とキャンセル実行処理）
-        private delegate Boolean d_task_cancel();
-        private Boolean w_task_cancel()
+        private delegate Boolean _task_cancel();
+        private Boolean task_cancel()
         {
             Boolean flag = false;
             if (token.IsCancellationRequested)
@@ -74,14 +71,14 @@ namespace LPRepo
                 token_src.Dispose();
                 token_src = null;
                 if (ldr != null) ldr.logout();
-                operationStatusReport.AppendText("処理をキャンセルしLibraからログアウトしました。（" + DateUtil.get_logtime() + "）" + "\r\n");
+                operationStatusReport.AppendText("処理をキャンセルしLibraPlusからログアウトしました。（" + DateUtil.get_logtime() + "）" + "\r\n");
                 flag = true;
             }
             return flag;
         }
 
         //デリゲート（コントロールの有効無効制御）
-        private delegate void d_ctrl_toggle(string ctrl_name);
+        private delegate void _ctrl_toggle(string ctrl_name);
         private void ctrl_toggle(string ctrl_name)
         {
             List<Control> controls = GetAllControls<Control>(this);
@@ -96,7 +93,7 @@ namespace LPRepo
         }
 
         //デリゲート（コントロールの有効制御）
-        private delegate void d_ctrl_activate(string ctrl_name);
+        private delegate void _ctrl_activate(string ctrl_name);
         private void ctrl_activate(string ctrl_name)
         {
             List<Control> controls = GetAllControls<Control>(this);
@@ -111,7 +108,7 @@ namespace LPRepo
         }
 
         //デリゲート（コントロールの無効制御）
-        private delegate void d_ctrl_deactivate(string ctrl_name);
+        private delegate void _ctrl_deactivate(string ctrl_name);
         private void ctrl_deactivate(string ctrl_name)
         {
             List<Control> controls = GetAllControls<Control>(this);
@@ -126,8 +123,8 @@ namespace LPRepo
         }
 
         //デリゲート（メイン画面のサイトIDコンボセットアップ）
-        private delegate void d_set_projectID_combo(List<List<string>> data);
-        private void w_set_projectID_combo(List<List<string>> data)
+        private delegate void _set_projectID_combo(List<List<string>> data);
+        private void set_projectID_combo(List<List<string>> data)
         {
             List<projectIDComboItem> ListBoxItem = new List<projectIDComboItem>();
             projectIDComboItem itm;
@@ -144,8 +141,8 @@ namespace LPRepo
         }
 
         //デリゲート（メイン画面のページIDコンボセットアップ）
-        private delegate void d_set_pageID_combo(List<List<string>> data);
-        private void w_set_pageID_combo(List<List<string>> data)
+        private delegate void _set_pageID_combo(List<List<string>> data);
+        private void set_pageID_combo(List<List<string>> data)
         {
             List<pageIDComboItem> ListBoxItem = new List<pageIDComboItem>();
             pageIDComboItem itm;
@@ -164,19 +161,17 @@ namespace LPRepo
             pageIDListBox.SetSelected(0, false);
         }
 
-
         //デリゲート（ページIDコンボが選択されているか）
-        private delegate Boolean d_is_pageID_selected();
-        private Boolean w_is_pageID_selected()
+        private delegate Boolean _is_pageID_selected();
+        private Boolean is_pageID_selected()
         {
             if (pageIDListBox.SelectedItems.Count == 0) return false;
             else return true;
         }
 
-
         //デリゲート（ページIDコンボ選択値を取得）
-        private delegate List<List<string>> d_pageID_data();
-        private List<List<string>> w_pageID_data()
+        private delegate List<List<string>> _get_pageID_rows();
+        private List<List<string>> get_pageID_rows()
         {
             List<List<string>> data = new List<List<string>>();
 

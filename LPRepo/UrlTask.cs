@@ -14,19 +14,15 @@ namespace LPRepo
             Task.Run(() =>
             {
 
-                //共通デリゲートインスタンス
-                d_status_messenger message = w_status_messenger;
-                d_ldr_activate ldr_activate = w_ldr_activate;
-                d_task_cancel canceler = w_task_cancel;
+                //デリゲートインスタンス
+                _write_log __write_log = write_log;
+                _ldr_activate __ldr_activate = ldr_activate;
+                _task_cancel __task_cancel = task_cancel;
                 _is_basic_auth_condition __is_basic_auth_condition = is_basic_auth_condition;
-
-                //専用デリゲートインスタンス（条件系）
-                d_is_pageID_selected _is_pageID_selected = w_is_pageID_selected;
-
-                //専用デリゲートインスタンス（取得系）
-                d_get_workDir _get_workDir = w_get_workDir;
-                d_get_projectID _get_projectID = w_get_projectID;
-                d_pageID_data get_page_rows = w_pageID_data;
+                _is_pageID_selected __is_pageID_selected = is_pageID_selected;
+                _get_workDir __get_workDir = get_workDir;
+                _get_projectID __get_projectID = get_projectID;
+                _get_pageID_rows __get_page_rows = get_pageID_rows;
 
                 //Basic認証のON時の条件判定
                 if (!(Boolean)this.Invoke(__is_basic_auth_condition)) return;
@@ -34,24 +30,24 @@ namespace LPRepo
                 if (ldr_activated == false)
                 {
                     //Libraドライバ起動しエラーの場合早期退出
-                    if (!(Boolean)this.Invoke(ldr_activate)) return;
+                    if (!(Boolean)this.Invoke(__ldr_activate)) return;
                 }
 
                 ldr.home();
-                this.Invoke(message, "Libraにログインします。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "Libraにログインします。（" + DateUtil.get_logtime() + "）");
                 ldr.login();
                 DateUtil.app_sleep(shortWait);
 
-                string projectID = (string)this.Invoke(_get_projectID);
+                string projectID = (string)this.Invoke(__get_projectID);
                 ldr.projectID = projectID;
 
                 List<List<string>> data = new List<List<string>>();
                 string site_name = "";
 
                 //タスクのキャンセル判定
-                if ((Boolean)this.Invoke(canceler)) return;
+                if ((Boolean)this.Invoke(__task_cancel)) return;
 
-                this.Invoke(message, "検査メイン画面に移動します。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "検査メイン画面に移動します。（" + DateUtil.get_logtime() + "）");
                 ldr.browse_sv_mainpage();
                 DateUtil.app_sleep(longWait);
 
@@ -60,16 +56,16 @@ namespace LPRepo
 
 
                 //タスクのキャンセル判定
-                if ((Boolean)this.Invoke(canceler)) return;
+                if ((Boolean)this.Invoke(__task_cancel)) return;
 
-                string save_dir = (string)this.Invoke(_get_workDir);
+                string save_dir = (string)this.Invoke(__get_workDir);
                 string save_filename = save_dir + projectID + "_" + site_name + " URL.txt";
 
                 FileUtil fu = new FileUtil();
                 fu.write_tsv_data(data, save_filename);
 
                 ldr.logout();
-                this.Invoke(message, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
 
             });
         }
@@ -79,21 +75,15 @@ namespace LPRepo
         {
             Task.Run(() =>
             {
-
-                //共通デリゲートインスタンス
-                d_status_messenger message = w_status_messenger;
-                d_ldr_activate ldr_activate = w_ldr_activate;
-                d_task_cancel canceler = w_task_cancel;
+                //デリゲートインスタンス
+                _write_log __write_log = write_log;
+                _ldr_activate __ldr_activate = ldr_activate;
+                _task_cancel __task_cancel = task_cancel;
                 _is_basic_auth_condition __is_basic_auth_condition = is_basic_auth_condition;
-
-
-                //専用デリゲートインスタンス（条件系）
-                d_is_pageID_selected _is_pageID_selected = w_is_pageID_selected;
-
-                //専用デリゲートインスタンス（取得系）
-                d_get_workDir _get_workDir = w_get_workDir;
-                d_get_projectID _get_projectID = w_get_projectID;
-                d_pageID_data get_page_rows = w_pageID_data;
+                _is_pageID_selected __is_pageID_selected = is_pageID_selected;
+                _get_workDir __get_workDir = get_workDir;
+                _get_projectID __get_projectID = get_projectID;
+                _get_pageID_rows __get_page_rows = get_pageID_rows;
 
                 //Basic認証のON時の条件判定
                 if (!(Boolean)this.Invoke(__is_basic_auth_condition)) return;
@@ -101,21 +91,21 @@ namespace LPRepo
                 if (ldr_activated == false)
                 {
                     //Libraドライバ起動しエラーの場合早期退出
-                    if (!(Boolean)this.Invoke(ldr_activate)) return;
+                    if (!(Boolean)this.Invoke(__ldr_activate)) return;
                 }
 
                 ldr.home();
-                this.Invoke(message, "LibraPlusにログインします。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "LibraPlusにログインします。（" + DateUtil.get_logtime() + "）");
                 ldr.login();
                 DateUtil.app_sleep(shortWait);
 
-                string projectID = (string)this.Invoke(_get_projectID);
+                string projectID = (string)this.Invoke(__get_projectID);
                 ldr.projectID = projectID;
 
                 List<List<string>> data = new List<List<string>>();
                 string site_name = "";
 
-                this.Invoke(message, "検査メイン画面に移動します。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "検査メイン画面に移動します。（" + DateUtil.get_logtime() + "）");
                 ldr.browse_sv_mainpage();
                 DateUtil.app_sleep(longWait);
 
@@ -124,23 +114,23 @@ namespace LPRepo
 
 
                 //タスクのキャンセル判定
-                if ((Boolean)this.Invoke(canceler)) return;
+                if ((Boolean)this.Invoke(__task_cancel)) return;
 
                 //ヘッダー行の処理
                 List<string> head_row = new List<string>() { "PID", "URL" };
                 data.Insert(0, head_row);
 
-                string save_dir = (string)this.Invoke(_get_workDir);
+                string save_dir = (string)this.Invoke(__get_workDir);
                 string save_filename = save_dir + projectID + "_" + site_name + " URL.xlsx";
 
                 //タスクのキャンセル判定
-                if ((Boolean)this.Invoke(canceler)) return;
+                if ((Boolean)this.Invoke(__task_cancel)) return;
 
                 ExcelUtil eu = new ExcelUtil();
                 eu.save_xlsx_as(data, save_filename);
 
                 ldr.logout();
-                this.Invoke(message, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
 
             });
         }
@@ -150,21 +140,15 @@ namespace LPRepo
         {
             Task.Run(() =>
             {
-
-                //共通デリゲートインスタンス
-                d_status_messenger message = w_status_messenger;
-                d_ldr_activate ldr_activate = w_ldr_activate;
-                d_task_cancel canceler = w_task_cancel;
+                //デリゲートインスタンス
+                _write_log __write_log = write_log;
+                _ldr_activate __ldr_activate = ldr_activate;
+                _task_cancel __task_cancel = task_cancel;
                 _is_basic_auth_condition __is_basic_auth_condition = is_basic_auth_condition;
-
-
-                //専用デリゲートインスタンス（条件系）
-                d_is_pageID_selected _is_pageID_selected = w_is_pageID_selected;
-
-                //専用デリゲートインスタンス（取得系）
-                d_get_workDir _get_workDir = w_get_workDir;
-                d_get_projectID _get_projectID = w_get_projectID;
-                d_pageID_data get_page_rows = w_pageID_data;
+                _is_pageID_selected __is_pageID_selected = is_pageID_selected;
+                _get_workDir __get_workDir = get_workDir;
+                _get_projectID __get_projectID = get_projectID;
+                _get_pageID_rows __get_page_rows = get_pageID_rows;
 
                 //Basic認証のON時の条件判定
                 if (!(Boolean)this.Invoke(__is_basic_auth_condition)) return;
@@ -172,22 +156,22 @@ namespace LPRepo
                 if (ldr_activated == false)
                 {
                     //Libraドライバ起動しエラーの場合早期退出
-                    if (!(Boolean)this.Invoke(ldr_activate)) return;
+                    if (!(Boolean)this.Invoke(__ldr_activate)) return;
                 }
 
                 ldr.home();
-                this.Invoke(message, "LibraPlusにログインします。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "LibraPlusにログインします。（" + DateUtil.get_logtime() + "）");
                 ldr.login();
                 DateUtil.app_sleep(shortWait);
 
-                string projectID = (string)this.Invoke(_get_projectID);
+                string projectID = (string)this.Invoke(__get_projectID);
                 ldr.projectID = projectID;
 
                 List<List<string>> data = new List<List<string>>();
                 List<string> categories = new List<string>();
                 string site_name = "";
 
-                this.Invoke(message, "検査メイン画面に移動します。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "検査メイン画面に移動します。（" + DateUtil.get_logtime() + "）");
                 ldr.browse_sv_mainpage();
                 DateUtil.app_sleep(longWait);
 
@@ -197,23 +181,23 @@ namespace LPRepo
 
 
                 //タスクのキャンセル判定
-                if ((Boolean)this.Invoke(canceler)) return;
+                if ((Boolean)this.Invoke(__task_cancel)) return;
 
                 //ヘッダー行の処理
                 List<string> head_row = new List<string>() { "PID", "URL" };
                 data.Insert(0, head_row);
 
-                string save_dir = (string)this.Invoke(_get_workDir);
+                string save_dir = (string)this.Invoke(__get_workDir);
                 string save_filename = save_dir + projectID + "_" + site_name + " プロジェクト管理表.xlsx";
 
                 //タスクのキャンセル判定
-                if ((Boolean)this.Invoke(canceler)) return;
+                if ((Boolean)this.Invoke(__task_cancel)) return;
 
                 ExcelUtil eu = new ExcelUtil();
                 eu.save_asignlist_xlsx_as(data, categories, save_filename);
 
                 ldr.logout();
-                this.Invoke(message, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
 
             });
         }
