@@ -16,13 +16,8 @@ namespace LPRepo
         private int _shortWait;
         private string _driver;
         private string _headless;
-        private string _guidelineLevel;
-        private string _basic_auth;
         private string _workDir;
         private string _debugMode;
-        private string _iePath;
-        private string _ffPath;
-        private string _gcPath;
 
         public string uid
         {
@@ -72,18 +67,6 @@ namespace LPRepo
             set { _headless = value; }
         }
 
-        public string guidelineLevel
-        {
-            get { return _guidelineLevel; }
-            set { _guidelineLevel = value; }
-        }
-
-        public string basic_auth
-        {
-            get { return _basic_auth; }
-            set { _basic_auth = value; }
-        }
-
         public string workDir
         {
             get { return _workDir; }
@@ -94,22 +77,6 @@ namespace LPRepo
         {
             get { return _debugMode; }
             set { _debugMode = value; }
-        }
-
-        public string iePath
-        {
-            get { return _iePath; }
-            set { _iePath = value; }
-        }
-        public string ffPath
-        {
-            get { return _ffPath; }
-            set { _ffPath = value; }
-        }
-        public string gcPath
-        {
-            get { return _gcPath; }
-            set { _gcPath = value; }
         }
 
         //コンストラクタ
@@ -123,13 +90,8 @@ namespace LPRepo
             _shortWait = 0;
             _driver = "";
             _headless = "";
-            _guidelineLevel = "";
-            _basic_auth = "";
             _workDir = "";
             _debugMode = "";
-            _iePath = "";
-            _ffPath = "";
-            _gcPath = "";
         }
     }
 }

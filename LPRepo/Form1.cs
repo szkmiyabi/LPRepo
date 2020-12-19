@@ -35,6 +35,9 @@ namespace LPRepo
         //Errorバッファ
         private string error_buff;
 
+        //Basic認証フラグ
+        private string basic_auth;
+
         //コンストラクタ
         public Form1()
         {
@@ -49,6 +52,9 @@ namespace LPRepo
 
             //Errorバッファ初期化
             error_buff = "";
+
+            //Basic認証フラグ初期化
+            basic_auth = "no";
 
             //Imageボタンの初期化
             imgButtonInit();
@@ -179,6 +185,12 @@ namespace LPRepo
         private void openAsFolderButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(workDir);
+        }
+
+        //Basic認証有チェックON
+        private void basicAuthFlagCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            basic_auth = (basicAuthFlagCheck.Checked) ? "yes" : "no";
         }
     }
 }

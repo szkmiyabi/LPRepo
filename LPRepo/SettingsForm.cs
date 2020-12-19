@@ -38,14 +38,8 @@ namespace LPRepo
                 appSettings.shortWait = (int)shortWaitCombo.Value;
                 appSettings.driver = (string)driverCombo.SelectedItem;
                 appSettings.headless = (string)headlessCombo.SelectedItem;
-                appSettings.guidelineLevel = (string)guidelineLevelCombo.SelectedItem;
-                appSettings.basic_auth = (string)basicAuthCombo.SelectedItem;
                 appSettings.workDir = (workDirText.Text == "") ? getDefaultWorkDir() : workDirText.Text;
                 appSettings.debugMode = (debugModeCheck.Checked == true) ? "yes" : "no";
-
-                appSettings.iePath = iePathText.Text;
-                appSettings.ffPath = ffPathText.Text;
-                appSettings.gcPath = gcPathText.Text;
 
                 XmlSerializer xsz = new XmlSerializer(typeof(Settings));
                 StreamWriter sw = new StreamWriter(
@@ -83,14 +77,8 @@ namespace LPRepo
                 shortWaitCombo.Value = (decimal)appSettings.shortWait;
                 driverCombo.Text = appSettings.driver;
                 headlessCombo.Text = appSettings.headless;
-                guidelineLevelCombo.Text = (appSettings.guidelineLevel == "") ? "AA" : appSettings.guidelineLevel;
-                basicAuthCombo.Text = appSettings.basic_auth;
                 workDirText.Text = (appSettings.workDir == "") ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" : appSettings.workDir;
                 debugModeCheck.Checked = (appSettings.debugMode == "yes") ? true : false;
-
-                iePathText.Text = appSettings.iePath;
-                ffPathText.Text = appSettings.ffPath;
-                gcPathText.Text = appSettings.gcPath;
 
             }
             catch (Exception ex)
@@ -112,14 +100,9 @@ namespace LPRepo
                 appSettings.shortWait = 5;
                 appSettings.driver = "";
                 appSettings.headless = "";
-                appSettings.guidelineLevel = "";
-                appSettings.basic_auth = "";
                 appSettings.workDir = "";
                 appSettings.debugMode = "";
 
-                appSettings.iePath = "";
-                appSettings.ffPath = "";
-                appSettings.gcPath = "";
 
                 XmlSerializer xsz = new XmlSerializer(typeof(Settings));
                 StreamWriter sw = new StreamWriter(
@@ -138,14 +121,8 @@ namespace LPRepo
                 shortWaitCombo.Value = 5;
                 driverCombo.Text = "";
                 headlessCombo.Text = "";
-                guidelineLevelCombo.Text = "";
-                basicAuthCombo.Text = "";
                 workDirText.Text = "";
                 debugModeCheck.Checked = false;
-
-                iePathText.Text = "";
-                ffPathText.Text = "";
-                gcPathText.Text = "";
 
                 MessageBox.Show("設定が削除できました。");
 
@@ -175,46 +152,6 @@ namespace LPRepo
             return Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
         }
 
-
-        //IE起動パスを取得
-        private void iePathDefaultLoad()
-        {
-            string iepath = "";
-            string iepath1 = @"C:\Program Files\Internet Explorer\iexplore.exe";
-            string iepath2 = @"C:\Program Files (x86)\Internet Explorer\iexplore.exe";
-            if (System.IO.File.Exists(iepath1)) iepath = iepath1;
-            else if (System.IO.File.Exists(iepath2)) iepath = iepath2;
-            if (iepath == "") MessageBox.Show("取得できません");
-            else iePathText.Text = iepath;
-        }
-
-        //Firefox起動パスを取得
-        private void ffPathDefaultLoad()
-        {
-            string ffpath = "";
-            string ffpath1 = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-            string ffpath2 = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
-            if (System.IO.File.Exists(ffpath1)) ffpath = ffpath1;
-            else if (System.IO.File.Exists(ffpath2)) ffpath = ffpath2;
-            if (ffpath == "") MessageBox.Show("取得できません");
-            else ffPathText.Text = ffpath;
-        }
-
-        //Chrome起動パスを取得
-        private void gcPathDefaultLoad()
-        {
-            string gcpath = "";
-            string gcpath1 = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-            string gcpath2 = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
-            string gcpath3 = getUserHomePath() + @"\Local Settings\Application Data\Google\Chrome\Application\chrome.exe";
-            if (System.IO.File.Exists(gcpath1)) gcpath = gcpath1;
-            else if (System.IO.File.Exists(gcpath2)) gcpath = gcpath2;
-            else if (System.IO.File.Exists(gcpath3)) gcpath = gcpath3;
-            if (gcpath == "") MessageBox.Show("取得できません");
-            else gcPathText.Text = gcpath;
-
-        }
-
         //ユーザのホームフォルダパス
         private string getUserHomePath()
         {
@@ -235,21 +172,6 @@ namespace LPRepo
         private void ClearButton_Click(object sender, EventArgs e)
         {
             deleteSettings();
-        }
-
-        private void ffDefaultBtn_Click(object sender, EventArgs e)
-        {
-            ffPathDefaultLoad();
-        }
-
-        private void ieDefaultBtn_Click(object sender, EventArgs e)
-        {
-            iePathDefaultLoad();
-        }
-
-        private void gcDefaultBtn_Click(object sender, EventArgs e)
-        {
-            gcPathDefaultLoad();
         }
 
         private void workDirBrowseButton_Click(object sender, EventArgs e)

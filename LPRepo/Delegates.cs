@@ -27,14 +27,14 @@ namespace LPRepo
         }
 
         //デリゲート（基本認証ON/OFFチェック）
-        public delegate Boolean d_get_basic_auth_cond();
-        public Boolean w_get_basic_auth_cond()
+        public delegate Boolean _is_basic_auth_condition();
+        public Boolean is_basic_auth_condition()
         {
             Boolean flg = true;
-            if (basic_auth == "yes" && headless == "yes")
+            if (basicAuthFlagCheck.Checked == true && headless == "yes")
             {
                 flg = false;
-                operationStatusReport.AppendText("【エラー】基本認証⇒「はい」を選択した場合、ヘッドレス起動⇒「いいえ」に設定しないと動作しません。基本設定を確認してください。\r\n");
+                operationStatusReport.AppendText("【エラー】Basic認証有のチェックON時は、ヘッドレス起動⇒「いいえ」に設定しないと動作しません。基本設定を確認してください。\r\n");
             }
             return flg;
         }

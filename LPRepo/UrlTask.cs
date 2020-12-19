@@ -18,15 +18,18 @@ namespace LPRepo
                 d_status_messenger message = w_status_messenger;
                 d_ldr_activate ldr_activate = w_ldr_activate;
                 d_task_cancel canceler = w_task_cancel;
+                _is_basic_auth_condition __is_basic_auth_condition = is_basic_auth_condition;
 
                 //専用デリゲートインスタンス（条件系）
-                //d_get_UrlTask_source_flag _get_UrlTask_source_flag = w_get_UrlTask_source_flag;
                 d_is_pageID_selected _is_pageID_selected = w_is_pageID_selected;
 
                 //専用デリゲートインスタンス（取得系）
                 d_get_workDir _get_workDir = w_get_workDir;
                 d_get_projectID _get_projectID = w_get_projectID;
                 d_pageID_data get_page_rows = w_pageID_data;
+
+                //Basic認証のON時の条件判定
+                if (!(Boolean)this.Invoke(__is_basic_auth_condition)) return;
 
                 if (ldr_activated == false)
                 {
@@ -81,6 +84,8 @@ namespace LPRepo
                 d_status_messenger message = w_status_messenger;
                 d_ldr_activate ldr_activate = w_ldr_activate;
                 d_task_cancel canceler = w_task_cancel;
+                _is_basic_auth_condition __is_basic_auth_condition = is_basic_auth_condition;
+
 
                 //専用デリゲートインスタンス（条件系）
                 d_is_pageID_selected _is_pageID_selected = w_is_pageID_selected;
@@ -89,6 +94,9 @@ namespace LPRepo
                 d_get_workDir _get_workDir = w_get_workDir;
                 d_get_projectID _get_projectID = w_get_projectID;
                 d_pageID_data get_page_rows = w_pageID_data;
+
+                //Basic認証のON時の条件判定
+                if (!(Boolean)this.Invoke(__is_basic_auth_condition)) return;
 
                 if (ldr_activated == false)
                 {
@@ -147,6 +155,8 @@ namespace LPRepo
                 d_status_messenger message = w_status_messenger;
                 d_ldr_activate ldr_activate = w_ldr_activate;
                 d_task_cancel canceler = w_task_cancel;
+                _is_basic_auth_condition __is_basic_auth_condition = is_basic_auth_condition;
+
 
                 //専用デリゲートインスタンス（条件系）
                 d_is_pageID_selected _is_pageID_selected = w_is_pageID_selected;
@@ -155,6 +165,9 @@ namespace LPRepo
                 d_get_workDir _get_workDir = w_get_workDir;
                 d_get_projectID _get_projectID = w_get_projectID;
                 d_pageID_data get_page_rows = w_pageID_data;
+
+                //Basic認証のON時の条件判定
+                if (!(Boolean)this.Invoke(__is_basic_auth_condition)) return;
 
                 if (ldr_activated == false)
                 {

@@ -24,14 +24,8 @@ namespace LPRepo
         private int shortWait;
         private string driver;
         private string headless;
-        private string guidelineLevel;
-        private string basic_auth;
         private string workDir;
         private string debugMode;
-
-        private string iePath;
-        private string ffPath;
-        private string gcPath;
 
         //環境設定ダイアログを開く
         private void showSettingsForm()
@@ -66,14 +60,8 @@ namespace LPRepo
                 shortWait = appSettings.shortWait;
                 driver = appSettings.driver;
                 headless = appSettings.headless;
-                guidelineLevel = appSettings.guidelineLevel;
-                basic_auth = appSettings.basic_auth;
                 workDir = (appSettings.workDir == "") ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" : appSettings.workDir;
                 debugMode = (appSettings.debugMode == "" || appSettings.debugMode == "no") ? "no" : "yes";
-
-                iePath = appSettings.iePath;
-                ffPath = appSettings.ffPath;
-                gcPath = appSettings.gcPath;
 
             }
             catch (Exception ex)

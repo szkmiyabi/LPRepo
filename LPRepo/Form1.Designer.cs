@@ -43,11 +43,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.debugButton = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.openAsFolderButton = new System.Windows.Forms.Button();
             this.openAsSettingButton = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
-            this.openAsFolderButton = new System.Windows.Forms.Button();
+            this.basicAuthFlagCheck = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -56,6 +57,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.basicAuthFlagCheck);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.createSiteInfoBookButton);
             this.panel1.Controls.Add(this.projectIDLoadButton);
@@ -189,6 +191,15 @@
             this.panel5.Size = new System.Drawing.Size(725, 70);
             this.panel5.TabIndex = 4;
             // 
+            // openAsFolderButton
+            // 
+            this.openAsFolderButton.Location = new System.Drawing.Point(572, 17);
+            this.openAsFolderButton.Name = "openAsFolderButton";
+            this.openAsFolderButton.Size = new System.Drawing.Size(35, 35);
+            this.openAsFolderButton.TabIndex = 1;
+            this.openAsFolderButton.UseVisualStyleBackColor = true;
+            this.openAsFolderButton.Click += new System.EventHandler(this.openAsFolderButton_Click);
+            // 
             // openAsSettingButton
             // 
             this.openAsSettingButton.Location = new System.Drawing.Point(531, 17);
@@ -225,14 +236,16 @@
             this.operationStatusReport.Size = new System.Drawing.Size(704, 128);
             this.operationStatusReport.TabIndex = 0;
             // 
-            // openAsFolderButton
+            // basicAuthFlagCheck
             // 
-            this.openAsFolderButton.Location = new System.Drawing.Point(572, 17);
-            this.openAsFolderButton.Name = "openAsFolderButton";
-            this.openAsFolderButton.Size = new System.Drawing.Size(35, 35);
-            this.openAsFolderButton.TabIndex = 1;
-            this.openAsFolderButton.UseVisualStyleBackColor = true;
-            this.openAsFolderButton.Click += new System.EventHandler(this.openAsFolderButton_Click);
+            this.basicAuthFlagCheck.AutoSize = true;
+            this.basicAuthFlagCheck.Location = new System.Drawing.Point(117, 140);
+            this.basicAuthFlagCheck.Name = "basicAuthFlagCheck";
+            this.basicAuthFlagCheck.Size = new System.Drawing.Size(106, 19);
+            this.basicAuthFlagCheck.TabIndex = 4;
+            this.basicAuthFlagCheck.Text = "Basic認証有";
+            this.basicAuthFlagCheck.UseVisualStyleBackColor = true;
+            this.basicAuthFlagCheck.CheckedChanged += new System.EventHandler(this.basicAuthFlagCheck_CheckedChanged);
             // 
             // Form1
             // 
@@ -279,6 +292,7 @@
         private System.Windows.Forms.Button doUrlTaksFormatExcelButton;
         private System.Windows.Forms.Button doAsignListButton;
         private System.Windows.Forms.Button openAsFolderButton;
+        private System.Windows.Forms.CheckBox basicAuthFlagCheck;
     }
 }
 
