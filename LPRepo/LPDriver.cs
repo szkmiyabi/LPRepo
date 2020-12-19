@@ -32,14 +32,8 @@ namespace LPRepo
         private string index_url = "https://jis2.infocreate.co.jp/libraplus/top";
         private string working_site_url = "https://jis2.infocreate.co.jp/libraplus/site/list/0";
         private string completed_site_url = "https://jis2.infocreate.co.jp/libraplus/site/list/1";
-        /*private string rep_index_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report/projID/";
-        private string rep_detail_url_base = "http://jis.infocreate.co.jp/diagnose/indexv2/report2/projID/";
-        */
         private string sv_mainpage_url_base = "http://jis2.infocreate.co.jp/libraplus/inspect/start/index/";
-        /*
-        private string completed_site_url = "https://jis.infocreate.co.jp/index/end/";
-        private string certificated_site_url = "https://jis.infocreate.co.jp/index/rediagnose/";
-        */
+
         private string _basic_auth_flag;
         private Boolean _basic_authenicated;
         private string workDir;
@@ -81,7 +75,6 @@ namespace LPRepo
             _wd.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(systemWait);
             _wd.Manage().Window.Size = new System.Drawing.Size(1280, 900);
             _windowID = _wd.WindowHandles[0];
-            //MessageBox.Show(_windowID);
             _jexe = (IJavaScriptExecutor)_wd;
         }
 
@@ -242,7 +235,7 @@ namespace LPRepo
             _wd.Navigate().GoToUrl(sv_mainpage_url_base + _projectID);
         }
 
-        //サイト一覧を取得
+        //サイト一覧を取得（サイトIDコンボ用）
         public List<List<string>> get_site_list()
         {
             List<List<string>> data = new List<List<string>>();

@@ -83,7 +83,6 @@ namespace LPRepo
                 d_task_cancel canceler = w_task_cancel;
 
                 //専用デリゲートインスタンス（条件系）
-                //d_get_UrlTask_source_flag _get_UrlTask_source_flag = w_get_UrlTask_source_flag;
                 d_is_pageID_selected _is_pageID_selected = w_is_pageID_selected;
 
                 //専用デリゲートインスタンス（取得系）
@@ -98,14 +97,13 @@ namespace LPRepo
                 }
 
                 ldr.home();
-                this.Invoke(message, "Libraにログインします。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(message, "LibraPlusにログインします。（" + DateUtil.get_logtime() + "）");
                 ldr.login();
                 DateUtil.app_sleep(shortWait);
 
                 string projectID = (string)this.Invoke(_get_projectID);
                 ldr.projectID = projectID;
 
-                //string flag = (string)this.Invoke(_get_UrlTask_source_flag);
                 List<List<string>> data = new List<List<string>>();
                 string site_name = "";
 
@@ -139,7 +137,7 @@ namespace LPRepo
             });
         }
 
-        //PID+URLのExcelファイル出力
+        //プロジェクト管理表のExcelファイル出力
         private void do_create_asignlist_xlsx()
         {
             Task.Run(() =>
@@ -151,7 +149,6 @@ namespace LPRepo
                 d_task_cancel canceler = w_task_cancel;
 
                 //専用デリゲートインスタンス（条件系）
-                //d_get_UrlTask_source_flag _get_UrlTask_source_flag = w_get_UrlTask_source_flag;
                 d_is_pageID_selected _is_pageID_selected = w_is_pageID_selected;
 
                 //専用デリゲートインスタンス（取得系）
@@ -166,14 +163,13 @@ namespace LPRepo
                 }
 
                 ldr.home();
-                this.Invoke(message, "Libraにログインします。（" + DateUtil.get_logtime() + "）");
+                this.Invoke(message, "LibraPlusにログインします。（" + DateUtil.get_logtime() + "）");
                 ldr.login();
                 DateUtil.app_sleep(shortWait);
 
                 string projectID = (string)this.Invoke(_get_projectID);
                 ldr.projectID = projectID;
 
-                //string flag = (string)this.Invoke(_get_UrlTask_source_flag);
                 List<List<string>> data = new List<List<string>>();
                 List<string> categories = new List<string>();
                 string site_name = "";
