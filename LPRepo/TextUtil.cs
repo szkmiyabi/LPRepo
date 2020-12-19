@@ -42,45 +42,11 @@ namespace LPRepo
             return data;
         }
 
-        //達成基準番号をJIS2016形式に変換
-        public static string jis2016_encode(string str)
-        {
-            return Regex.Replace(str, @"^7\.", "");
-        }
-
         //ページIDコンボからURLだけを取り出す
         public static string fetch_url(string str)
         {
             return Regex.Replace(str, @"\[[0-9a-zA-Z\-_]+\]  ", "");
         }
 
-        //レポートのヘッダー行を生成
-        public static List<string> get_header()
-        {
-            List<string> head_row = new List<string>();
-            head_row.Add("管理番号");
-            head_row.Add("URL");
-            head_row.Add("達成基準");
-            head_row.Add("状況/要件");
-            head_row.Add("実装番号");
-            head_row.Add("検査結果");
-            head_row.Add("検査員");
-            head_row.Add("コメント");
-            head_row.Add("対象ソースコード");
-            head_row.Add("修正ソースコード");
-            return head_row;
-        }
-
-        //レポートのヘッダー行を生成
-        public static List<string> get_header_SrcTask()
-        {
-            List<string> head_row = new List<string>();
-            head_row.Add("管理番号");
-            head_row.Add("URL");
-            head_row.Add("達成基準");
-            head_row.Add("実装番号");
-            head_row.Add("対象ソースコード");
-            return head_row;
-        }
     }
 }

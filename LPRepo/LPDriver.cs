@@ -90,8 +90,8 @@ namespace LPRepo
         }
 
         //operationStatusReportのデリゲート
-        public delegate void d_messenger(string msg);
-        public void w_messenger(string msg)
+        public delegate void _write_log(string msg);
+        public void write_log(string msg)
         {
             main_form.operationStatusReport.AppendText(msg + "\r\n");
         }
@@ -228,8 +228,8 @@ namespace LPRepo
             //basic認証の処理
             if (_basic_auth_flag.Equals("yes") && _basic_authenicated == false)
             {
-                d_messenger message = new d_messenger(w_messenger);
-                main_form.Invoke(message, "【お知らせ】基本認証オプションが有効化されています。ログインアラートで認証してください。");
+                _write_log __write_log = write_log;
+                main_form.Invoke(__write_log, "【お知らせ】基本認証オプションが有効化されています。ログインアラートで認証してください。");
                 _basic_authenicated = true;
             }
             _wd.Navigate().GoToUrl(sv_mainpage_url_base + _projectID);

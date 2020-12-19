@@ -18,8 +18,8 @@ namespace LPRepo
         }
 
         //デリゲート
-        public delegate void d_messenger(string msg);
-        public void w_messenger(string msg)
+        public delegate void _write_log(string msg);
+        public void write_log(string msg)
         {
             main_form.operationStatusReport.AppendText(msg + "\r\n");
         }
@@ -27,7 +27,7 @@ namespace LPRepo
         //配列をテキストファイルとして書き込み
         public void write_text_data(List<string> data, string filename)
         {
-            d_messenger message = new d_messenger(w_messenger);
+            _write_log __write_log = write_log;
             Encoding enc = new System.Text.UTF8Encoding(false);
             StreamWriter sw = new StreamWriter(filename, false, enc);
             for (int i = 0; i < data.Count; i++)
@@ -36,13 +36,13 @@ namespace LPRepo
                 sw.Write(row);
             }
             sw.Close();
-            main_form.Invoke(message, "保存に成功しました。（" + filename + "）");
+            main_form.Invoke(__write_log, "保存に成功しました。（" + filename + "）");
         }
 
         //2次元配列をTSVファイルとして書き込み
         public void write_tsv_data(List<List<string>> data, string filename)
         {
-            d_messenger message = new d_messenger(w_messenger);
+            _write_log __write_log = write_log;
             Encoding enc = new System.Text.UTF8Encoding(false);
             StreamWriter sw = new StreamWriter(filename, false, enc);
             for (int i = 0; i < data.Count; i++)
@@ -52,7 +52,7 @@ namespace LPRepo
                 sw.Write(row_data);
             }
             sw.Close();
-            main_form.Invoke(message, "保存に成功しました。（" + filename + "）");
+            main_form.Invoke(__write_log, "保存に成功しました。（" + filename + "）");
         }
     }
 }

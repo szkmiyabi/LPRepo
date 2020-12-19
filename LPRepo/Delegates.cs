@@ -34,7 +34,7 @@ namespace LPRepo
             if (basicAuthFlagCheck.Checked == true && headless == "yes")
             {
                 flg = false;
-                operationStatusReport.AppendText("【エラー】Basic認証有のチェックON時は、ヘッドレス起動⇒「いいえ」に設定しないと動作しません。基本設定を確認してください。\r\n");
+                operationStatusReport.AppendText("【エラー】Basic認証有のチェックON時は、ヘッドレス起動⇒「no」に設定しないと動作しません。基本設定を確認してください。\r\n");
             }
             return flg;
         }

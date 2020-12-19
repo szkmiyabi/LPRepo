@@ -20,8 +20,8 @@ namespace LPRepo
         }
 
         //デリゲート
-        public delegate void d_messenger(string msg);
-        public void w_messenger(string msg)
+        public delegate void _write_log(string msg);
+        public void write_log(string msg)
         {
             main_form.operationStatusReport.AppendText(msg + "\r\n");
         }
@@ -44,7 +44,7 @@ namespace LPRepo
         //Excelファイルに出力
         public void save_xlsx_as(List<List<string>> data, string filename)
         {
-            d_messenger message = new d_messenger(w_messenger);
+            _write_log __write_log = write_log;
 
             try
             {
@@ -74,12 +74,12 @@ namespace LPRepo
                     }
 
                     wb.SaveAs(filename);
-                    main_form.Invoke(message, "保存に成功しました。（" + filename + "）");
+                    main_form.Invoke(__write_log, "保存に成功しました。（" + filename + "）");
                 }
             }
             catch (Exception ex)
             {
-                main_form.Invoke(message, "【エラー】" + ex.Message);
+                main_form.Invoke(__write_log, "【エラー】" + ex.Message);
                 return;
             }
 
@@ -90,7 +90,7 @@ namespace LPRepo
         //作業割り当て表Excelファイル出力
         public void save_asignlist_xlsx_as(List<List<string>> data, List<string> categories, string filename)
         {
-            d_messenger message = new d_messenger(w_messenger);
+            _write_log __write_log = write_log;
 
             try
             {
@@ -138,12 +138,12 @@ namespace LPRepo
                     }
 
                     wb.SaveAs(filename);
-                    main_form.Invoke(message, "保存に成功しました。（" + filename + "）");
+                    main_form.Invoke(__write_log, "保存に成功しました。（" + filename + "）");
                 }
             }
             catch (Exception ex)
             {
-                main_form.Invoke(message, "【エラー】" + ex.Message);
+                main_form.Invoke(__write_log, "【エラー】" + ex.Message);
                 return;
             }
 
