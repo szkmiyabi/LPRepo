@@ -45,8 +45,24 @@ namespace LPRepo
             this.Invoke(__write_log, "検査メイン画面に移動します。（" + DateUtil.get_logtime() + "）");
             ldr.browse_sv_mainpage();
             DateUtil.app_sleep(longWait);
-            //ldr.select_category("リスト");
+            ldr.select_category("リスト");
+            DateUtil.app_sleep(shortWait);
             ldr.select_view("検査項目一覧");
+            DateUtil.app_sleep(shortWait);
+            List<List<object>> data = ldr.get_survey_details();
+            for(int i=0; i<data.Count; i++)
+            {
+                var row = data[i];
+                string v1 = (string)row[0];
+                string v2 = (string)row[1];
+                this.Invoke(__write_log, v1 + "  " + v2);
+                List<string> gs = (List<string>)row[2];
+                foreach(string tx in gs)
+                {
+                    this.Invoke(__write_log, tx);
+                }
+
+            }
             ldr.logout();
             this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
         }

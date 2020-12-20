@@ -415,22 +415,6 @@ namespace LPRepo
                     break;
                 }
             }
-
-            vw_list_wrap = _wd.FindElement(By.Id("tabs"));
-            vw_list = vw_list_wrap.FindElements(By.TagName("li"));
-            for (int i = 0; i < vw_list.Count<IWebElement>(); i++)
-            {
-                IWebElement li = vw_list.ElementAt<IWebElement>(i);
-                var atg = li.FindElement(By.TagName("a"));
-                var attr = atg.GetAttribute("class");
-                Regex pt = new Regex(@"active", RegexOptions.Compiled);
-                if (pt.IsMatch(attr))
-                {
-                    _write_log __write_log = write_log;
-                    main_form.Invoke(__write_log, atg.Text);
-
-                }
-            }
         }
 
         //画面モードタブを選択（オーバーライド）
@@ -447,22 +431,6 @@ namespace LPRepo
                 {
                     atg.Click();
                     break;
-                }
-            }
-
-            vw_list_wrap = _wd.FindElement(By.Id("tabs"));
-            vw_list = vw_list_wrap.FindElements(By.TagName("li"));
-            for (int i = 0; i < vw_list.Count<IWebElement>(); i++)
-            {
-                IWebElement li = vw_list.ElementAt<IWebElement>(i);
-                var atg = li.FindElement(By.TagName("a"));
-                var attr = atg.GetAttribute("class");
-                Regex pt = new Regex(@"active", RegexOptions.Compiled);
-                if (pt.IsMatch(attr))
-                {
-                    _write_log __write_log = write_log;
-                    main_form.Invoke(__write_log, atg.Text);
-
                 }
             }
         }
@@ -483,6 +451,48 @@ namespace LPRepo
                 sname = mt.Groups[5].Value;
             }
             return sname;
+        }
+
+        //検査項目一覧を取得
+        public List<List<object>> get_survey_details()
+        {
+            List<List<object>> data = new List<List<object>>();
+            var tbl = _wd.FindElement(By.Id("table-inspect"));
+            var trs = tbl.FindElements(By.TagName("tr"));
+            for(int i=0; i<trs.Count<IWebElement>(); i++)
+            {
+                if (i == 0) continue;
+                string num = "";
+                string title = "";
+                List<string> gs = new List<string>();
+                List<object> row = new List<object>();
+                var tr = trs.ElementAt<IWebElement>(i);
+                var tds = tr.FindElements(By.TagName("td"));
+                var td1 = tds.ElementAt<IWebElement>(0);
+                var td2 = tds.ElementAt<IWebElement>(1);
+                num = td1.Text;
+                title = td2.Text;
+                var sps = td2.FindElements(By.TagName("span"));
+                foreach(IWebElement e in sps)
+                {
+                    var tx = e.Text;
+                    title = title.Replace(tx, "");
+                }
+                var ul = td2.FindElement(By.TagName("ul"));
+                var ls = ul.FindElements(By.TagName("li"));
+                foreach(IWebElement e in ls)
+                {
+                    var tx = e.Text;
+                    title = title.Replace(tx, "");
+                    gs.Add(tx);
+                }
+                title = TextUtil.trim(TextUtil.text_clean(title));
+                row.Add(num);
+                row.Add(title);
+                row.Add(gs);
+                data.Add(row);
+            }
+            return data;
         }
 
 
