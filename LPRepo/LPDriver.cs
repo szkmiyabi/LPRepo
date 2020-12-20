@@ -399,6 +399,74 @@ namespace LPRepo
             }
         }
 
+        //画面モードタブを選択
+        public void select_view(int nx)
+        {
+
+            var vw_list_wrap = _wd.FindElement(By.Id("tabs"));
+            var vw_list = vw_list_wrap.FindElements(By.TagName("li"));
+            for (int i = 0; i < vw_list.Count<IWebElement>(); i++)
+            {
+                IWebElement li = vw_list.ElementAt<IWebElement>(i);
+                var atg = li.FindElement(By.TagName("a"));
+                if (i == nx)
+                {
+                    atg.Click();
+                    break;
+                }
+            }
+
+            vw_list_wrap = _wd.FindElement(By.Id("tabs"));
+            vw_list = vw_list_wrap.FindElements(By.TagName("li"));
+            for (int i = 0; i < vw_list.Count<IWebElement>(); i++)
+            {
+                IWebElement li = vw_list.ElementAt<IWebElement>(i);
+                var atg = li.FindElement(By.TagName("a"));
+                var attr = atg.GetAttribute("class");
+                Regex pt = new Regex(@"active", RegexOptions.Compiled);
+                if (pt.IsMatch(attr))
+                {
+                    _write_log __write_log = write_log;
+                    main_form.Invoke(__write_log, atg.Text);
+
+                }
+            }
+        }
+
+        //画面モードタブを選択（オーバーライド）
+        public void select_view(string vwname)
+        {
+            var vw_list_wrap = _wd.FindElement(By.Id("tabs"));
+            var vw_list = vw_list_wrap.FindElements(By.TagName("li"));
+            for (int i = 0; i < vw_list.Count<IWebElement>(); i++)
+            {
+                IWebElement li = vw_list.ElementAt<IWebElement>(i);
+                var atg = li.FindElement(By.TagName("a"));
+                string val = atg.Text;
+                if (val == vwname)
+                {
+                    atg.Click();
+                    break;
+                }
+            }
+
+            vw_list_wrap = _wd.FindElement(By.Id("tabs"));
+            vw_list = vw_list_wrap.FindElements(By.TagName("li"));
+            for (int i = 0; i < vw_list.Count<IWebElement>(); i++)
+            {
+                IWebElement li = vw_list.ElementAt<IWebElement>(i);
+                var atg = li.FindElement(By.TagName("a"));
+                var attr = atg.GetAttribute("class");
+                Regex pt = new Regex(@"active", RegexOptions.Compiled);
+                if (pt.IsMatch(attr))
+                {
+                    _write_log __write_log = write_log;
+                    main_form.Invoke(__write_log, atg.Text);
+
+                }
+            }
+        }
+
         //サイト名を取得
         public string get_site_name()
         {
