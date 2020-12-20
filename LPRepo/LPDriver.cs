@@ -399,6 +399,26 @@ namespace LPRepo
             }
         }
 
+        //カレントカテゴリ名を取得
+        private string get_current_category_name()
+        {
+            string ret = "";
+            var cat_list_wrap = _wd.FindElement(By.Id("tabs-category"));
+            var cat_list = cat_list_wrap.FindElements(By.TagName("li"));
+            for (int i = 0; i < cat_list.Count<IWebElement>(); i++)
+            {
+                IWebElement li = cat_list.ElementAt<IWebElement>(i);
+                var atg = li.FindElement(By.TagName("a"));
+                var attr = atg.GetAttribute("class");
+                Regex pt = new Regex(@"active", RegexOptions.Compiled);
+                if (pt.IsMatch(attr))
+                {
+                    ret = _get_category_only_text(atg.Text);
+                }
+            }
+            return ret;
+        }
+
         //画面モードタブを選択
         public void select_view(int nx)
         {
@@ -462,6 +482,7 @@ namespace LPRepo
             for(int i=0; i<trs.Count<IWebElement>(); i++)
             {
                 if (i == 0) continue;
+                string category = get_current_category_name();
                 string num = "";
                 string title = "";
                 List<string> gs = new List<string>();
@@ -487,6 +508,7 @@ namespace LPRepo
                     gs.Add(tx);
                 }
                 title = TextUtil.trim(TextUtil.text_clean(title));
+                row.Add(category);
                 row.Add(num);
                 row.Add(title);
                 row.Add(gs);
