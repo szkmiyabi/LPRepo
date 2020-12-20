@@ -103,7 +103,7 @@ namespace LPRepo
         //実装実験ボタンクリック
         private void debugButton_Click(object sender, EventArgs e)
         {
-            do_categories_show();
+            do_create_category_by_details();
         }
 
         //サイトID読込クリック

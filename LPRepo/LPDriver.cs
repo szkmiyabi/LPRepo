@@ -422,7 +422,6 @@ namespace LPRepo
         //画面モードタブを選択
         public void select_view(int nx)
         {
-
             var vw_list_wrap = _wd.FindElement(By.Id("tabs"));
             var vw_list = vw_list_wrap.FindElements(By.TagName("li"));
             for (int i = 0; i < vw_list.Count<IWebElement>(); i++)
@@ -464,11 +463,17 @@ namespace LPRepo
             var tds = tbl.FindElements(By.CssSelector("tr td"));
             var td = tds.ElementAt<IWebElement>(0);
             string td_val = TextUtil.text_clean(td.Text);
-            Regex pt = new Regex(@"(\[)([a-zA-Z0-9]+)(\])(\s*)(.+?)( / )");
-            if (pt.IsMatch(td_val))
+            Regex pt1 = new Regex(@"(\[)([0-9]+)(\])( )(.+?)( / )");
+            Regex pt2 = new Regex(@"(\[)([0-9]+)(\])( )(.+)");
+            if (pt1.IsMatch(td_val))
             {
-                Match mt = pt.Match(td_val);
-                sname = mt.Groups[5].Value;
+                Match mt1 = pt1.Match(td_val);
+                sname = mt1.Groups[5].Value;
+            }
+            else if (pt2.IsMatch(td_val))
+            {
+                Match mt2 = pt2.Match(td_val);
+                sname = mt2.Groups[5].Value;
             }
             return sname;
         }
