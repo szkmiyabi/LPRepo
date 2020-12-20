@@ -103,15 +103,7 @@ namespace LPRepo
         //実装実験ボタンクリック
         private void debugButton_Click(object sender, EventArgs e)
         {
-            load_wd();
-            DateUtil.app_sleep(3);
-            ldr.home();
-            DateUtil.app_sleep(3);
-            ldr.login();
-            DateUtil.app_sleep(5);
-            ldr.logout();
-            DateUtil.app_sleep(5);
-            ldr.shutdown();
+            do_categories_show();
         }
 
         //サイトID読込クリック

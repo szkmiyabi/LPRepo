@@ -364,6 +364,40 @@ namespace LPRepo
             return ret;
         }
 
+        //カテゴリタブを選択
+        public void select_category(int nx)
+        {
+            var cat_list_wrap = _wd.FindElement(By.Id("tabs-category"));
+            var cat_list = cat_list_wrap.FindElements(By.TagName("li"));
+            for (int i = 0; i < cat_list.Count<IWebElement>(); i++)
+            {
+                IWebElement li = cat_list.ElementAt<IWebElement>(i);
+                var atg = li.FindElement(By.TagName("a"));
+                if (i == nx)
+                {
+                    atg.Click();
+                    break;
+                }
+            }
+        }
+
+        //カテゴリタブを選択（オーバーライド）
+        public void select_category(string catname)
+        {
+            var cat_list_wrap = _wd.FindElement(By.Id("tabs-category"));
+            var cat_list = cat_list_wrap.FindElements(By.TagName("li"));
+            for (int i = 0; i < cat_list.Count<IWebElement>(); i++)
+            {
+                IWebElement li = cat_list.ElementAt<IWebElement>(i);
+                var atg = li.FindElement(By.TagName("a"));
+                string val = _get_category_only_text(atg.Text);
+                if (val == catname)
+                {
+                    atg.Click();
+                    break;
+                }
+            }
+        }
 
         //サイト名を取得
         public string get_site_name()
@@ -382,6 +416,7 @@ namespace LPRepo
             }
             return sname;
         }
+
 
     }
 }
