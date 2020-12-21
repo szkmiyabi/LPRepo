@@ -486,7 +486,9 @@ namespace LPRepo
             var trs = tbl.FindElements(By.TagName("tr"));
             for(int i=0; i<trs.Count<IWebElement>(); i++)
             {
+                //ヘッダー行スキップ
                 if (i == 0) continue;
+
                 string category = get_current_category_name();
                 string num = "";
                 string title = "";
@@ -494,16 +496,32 @@ namespace LPRepo
                 List<object> row = new List<object>();
                 var tr = trs.ElementAt<IWebElement>(i);
                 var tds = tr.FindElements(By.TagName("td"));
+
+                //検査項目が0件の時の処理（セル結合でエラー出るため早期返却）
+                if (tds.ElementAt<IWebElement>(0).GetAttribute("colspan") != null)
+                {
+                    List<object> row_ = new List<object>();
+                    List<string> gs_ = new List<string>();
+                    row_.Add(category);
+                    row_.Add("");
+                    row_.Add("");
+                    row_.Add(gs_);
+                    data.Add(row_);
+                    return data;
+                }
+
                 var td1 = tds.ElementAt<IWebElement>(0);
                 var td2 = tds.ElementAt<IWebElement>(1);
                 num = td1.Text;
                 title = td2.Text;
+
                 var sps = td2.FindElements(By.TagName("span"));
                 foreach(IWebElement e in sps)
                 {
                     var tx = e.Text;
                     title = title.Replace(tx, "");
                 }
+
                 var ul = td2.FindElement(By.TagName("ul"));
                 var ls = ul.FindElements(By.TagName("li"));
                 foreach(IWebElement e in ls)
@@ -512,6 +530,7 @@ namespace LPRepo
                     title = title.Replace(tx, "");
                     gs.Add(tx);
                 }
+
                 title = TextUtil.trim(TextUtil.text_clean(title));
                 row.Add(category);
                 row.Add(num);
