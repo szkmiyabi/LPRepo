@@ -193,9 +193,8 @@ namespace LPRepo
             List<List<string>> data = new List<List<string>>();
             foreach (projectIDComboItem cmb in projectIDListBox.SelectedItems)
             {
-                string pid = cmb.id_str;
                 string name = cmb.display_str;
-                line = pid + "_" + name;
+                line = name;
             }
             return line;
         }
