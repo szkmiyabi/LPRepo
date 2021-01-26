@@ -185,5 +185,35 @@ namespace LPRepo
         {
             basic_auth = (basicAuthFlagCheck.Checked) ? "yes" : "no";
         }
+
+        //TSVからロードボタンクリック
+        private void doPageIDLoadFromTsvButton_Click(object sender, EventArgs e)
+        {
+            set_pageID_combo_from_tsv();
+        }
+
+        //スクリーンショットボタンクリック
+        private void doPageIDsScreenShotButton_Click(object sender, EventArgs e)
+        {
+            //CancellationTokenを発行
+            token_src = new CancellationTokenSource();
+            token = token_src.Token;
+            //処理実行
+            do_pageIDs_screenshot();
+        }
+
+        //ページID全選択クリック
+        private void pageIDListBoxSelectAllButton_Click(object sender, EventArgs e)
+        {
+            SendMessage(pageIDListBox.Handle, LB_SETSEL, 1, -1);
+            pageIDListBox.SetSelected(0, true);
+        }
+
+        //ページID選択解除クリック
+        private void pageIDListBoxSelectClearButton_Click(object sender, EventArgs e)
+        {
+            SendMessage(pageIDListBox.Handle, LB_SETSEL, 0, -1);
+            pageIDListBox.SetSelected(0, false);
+        }
     }
 }

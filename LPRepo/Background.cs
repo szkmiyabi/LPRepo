@@ -170,5 +170,51 @@ namespace LPRepo
             openAsFolderButton.Image = folderImg;
         }
 
+        //ファイル選択ダイアログを表示
+        private string getFileNameFromDialog()
+        {
+            string filename = "";
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "";
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                filename = ofd.FileName;
+            }
+            return filename;
+        }
+
+        //テキストファイル配列を取得
+        private List<List<string>> getTextLineList(string filename)
+        {
+            string body = "";
+            List<List<string>> data = new List<List<string>>();
+            char[] delimiter = { '\t', ',' };
+
+            if (filename != null)
+            {
+                StreamReader sr = new StreamReader(
+                    filename,
+                    System.Text.Encoding.GetEncoding("UTF-8")
+                );
+                body = sr.ReadToEnd();
+                sr.Close();
+            }
+
+            if (body == "") return null;
+
+            StringReader text = new StringReader(body);
+            while(text.Peek() > -1)
+            {
+                string line = text.ReadLine();
+                string[] tmp = line.Split(delimiter);
+                List<string> row = new List<string>();
+                row.Add(tmp[0]);
+                row.Add(tmp[1]);
+                data.Add(row);
+            }
+
+            return data;
+        }
+
     }
 }

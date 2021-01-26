@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -269,6 +270,55 @@ namespace LPRepo
                 this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
 
             });
+        }
+
+        //ページのスクリーンショットの一覧取得
+        private void do_pageIDs_screenshot()
+        {
+            Task.Run(() =>
+            {
+
+                //デリゲートインスタンス
+                _get_workDir __get_workDir = get_workDir;
+                _get_projectID_row __get_projectID_row = get_projectID_row;
+                _get_pageID_rows __get_page_rows = get_pageID_rows;
+                _ldr_activate __ldr_activate = ldr_activate;
+                _write_log __write_log = write_log;
+                _task_cancel_tsv __task_cancel_tsv = task_cancel_tsv;
+
+
+                if (ldr_activated == false)
+                {
+                    //Libraドライバ起動しエラーの場合早期退出
+                    if (!(Boolean)this.Invoke(__ldr_activate)) return;
+                }
+
+                this.Invoke(__write_log, "処理を開始します。（" + DateUtil.get_logtime() + "）");
+
+                //保存先ディレクトリ生成
+                string project_dir = (string)this.Invoke(__get_projectID_row);
+                string save_path = (string)this.Invoke(__get_workDir) + project_dir + @"\";
+                if (!Directory.Exists(save_path)) Directory.CreateDirectory(save_path);
+
+                List<List<string>> page_rows = (List<List<string>>)this.Invoke(__get_page_rows);
+
+                foreach (var page_row in page_rows)
+                {
+                    string pageID = page_row[0];
+                    string pageURL = page_row[1];
+                    this.Invoke(__write_log, pageID + " を処理しています。（" + DateUtil.get_logtime() + "）");
+                    ldr.wd.Navigate().GoToUrl(pageURL);
+                    DateUtil.app_sleep(shortWait);
+                    ldr.fullpage_screenshot_as(save_path + pageID + "." + "png");
+
+                    //タスクのキャンセル判定
+                    if ((Boolean)this.Invoke(__task_cancel_tsv)) return;
+
+                }
+
+                this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
+            });
+
         }
 
     }

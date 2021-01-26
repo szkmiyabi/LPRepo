@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.basicAuthFlagCheck = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.createSiteInfoBookButton = new System.Windows.Forms.Button();
             this.projectIDLoadButton = new System.Windows.Forms.Button();
@@ -48,7 +49,10 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
-            this.basicAuthFlagCheck = new System.Windows.Forms.CheckBox();
+            this.doPageIDLoadFromTsvButton = new System.Windows.Forms.Button();
+            this.doPageIDsScreenShotButton = new System.Windows.Forms.Button();
+            this.pageIDListBoxSelectAllButton = new System.Windows.Forms.Button();
+            this.pageIDListBoxSelectClearButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -66,6 +70,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(235, 166);
             this.panel1.TabIndex = 0;
+            // 
+            // basicAuthFlagCheck
+            // 
+            this.basicAuthFlagCheck.AutoSize = true;
+            this.basicAuthFlagCheck.Location = new System.Drawing.Point(117, 140);
+            this.basicAuthFlagCheck.Name = "basicAuthFlagCheck";
+            this.basicAuthFlagCheck.Size = new System.Drawing.Size(106, 19);
+            this.basicAuthFlagCheck.TabIndex = 4;
+            this.basicAuthFlagCheck.Text = "Basic認証有";
+            this.basicAuthFlagCheck.UseVisualStyleBackColor = true;
+            this.basicAuthFlagCheck.CheckedChanged += new System.EventHandler(this.basicAuthFlagCheck_CheckedChanged);
             // 
             // label2
             // 
@@ -106,6 +121,10 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.pageIDListBoxSelectClearButton);
+            this.panel2.Controls.Add(this.pageIDListBoxSelectAllButton);
+            this.panel2.Controls.Add(this.doPageIDsScreenShotButton);
+            this.panel2.Controls.Add(this.doPageIDLoadFromTsvButton);
             this.panel2.Controls.Add(this.doAsignListButton);
             this.panel2.Controls.Add(this.doUrlTaksFormatExcelButton);
             this.panel2.Controls.Add(this.doUrlTaksFormatTextButton);
@@ -160,6 +179,7 @@
             this.pageIDListBox.Location = new System.Drawing.Point(15, 19);
             this.pageIDListBox.Name = "pageIDListBox";
             this.pageIDListBox.ScrollAlwaysVisible = true;
+            this.pageIDListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.pageIDListBox.Size = new System.Drawing.Size(457, 102);
             this.pageIDListBox.TabIndex = 4;
             // 
@@ -236,16 +256,45 @@
             this.operationStatusReport.Size = new System.Drawing.Size(704, 128);
             this.operationStatusReport.TabIndex = 0;
             // 
-            // basicAuthFlagCheck
+            // doPageIDLoadFromTsvButton
             // 
-            this.basicAuthFlagCheck.AutoSize = true;
-            this.basicAuthFlagCheck.Location = new System.Drawing.Point(117, 140);
-            this.basicAuthFlagCheck.Name = "basicAuthFlagCheck";
-            this.basicAuthFlagCheck.Size = new System.Drawing.Size(106, 19);
-            this.basicAuthFlagCheck.TabIndex = 4;
-            this.basicAuthFlagCheck.Text = "Basic認証有";
-            this.basicAuthFlagCheck.UseVisualStyleBackColor = true;
-            this.basicAuthFlagCheck.CheckedChanged += new System.EventHandler(this.basicAuthFlagCheck_CheckedChanged);
+            this.doPageIDLoadFromTsvButton.Location = new System.Drawing.Point(194, 127);
+            this.doPageIDLoadFromTsvButton.Name = "doPageIDLoadFromTsvButton";
+            this.doPageIDLoadFromTsvButton.Size = new System.Drawing.Size(69, 38);
+            this.doPageIDLoadFromTsvButton.TabIndex = 9;
+            this.doPageIDLoadFromTsvButton.Text = "TSVからロード";
+            this.doPageIDLoadFromTsvButton.UseVisualStyleBackColor = true;
+            this.doPageIDLoadFromTsvButton.Click += new System.EventHandler(this.doPageIDLoadFromTsvButton_Click);
+            // 
+            // doPageIDsScreenShotButton
+            // 
+            this.doPageIDsScreenShotButton.Location = new System.Drawing.Point(269, 126);
+            this.doPageIDsScreenShotButton.Name = "doPageIDsScreenShotButton";
+            this.doPageIDsScreenShotButton.Size = new System.Drawing.Size(41, 39);
+            this.doPageIDsScreenShotButton.TabIndex = 10;
+            this.doPageIDsScreenShotButton.Text = "SC";
+            this.doPageIDsScreenShotButton.UseVisualStyleBackColor = true;
+            this.doPageIDsScreenShotButton.Click += new System.EventHandler(this.doPageIDsScreenShotButton_Click);
+            // 
+            // pageIDListBoxSelectAllButton
+            // 
+            this.pageIDListBoxSelectAllButton.Location = new System.Drawing.Point(316, 133);
+            this.pageIDListBoxSelectAllButton.Name = "pageIDListBoxSelectAllButton";
+            this.pageIDListBoxSelectAllButton.Size = new System.Drawing.Size(75, 23);
+            this.pageIDListBoxSelectAllButton.TabIndex = 11;
+            this.pageIDListBoxSelectAllButton.Text = "全選択";
+            this.pageIDListBoxSelectAllButton.UseVisualStyleBackColor = true;
+            this.pageIDListBoxSelectAllButton.Click += new System.EventHandler(this.pageIDListBoxSelectAllButton_Click);
+            // 
+            // pageIDListBoxSelectClearButton
+            // 
+            this.pageIDListBoxSelectClearButton.Location = new System.Drawing.Point(397, 133);
+            this.pageIDListBoxSelectClearButton.Name = "pageIDListBoxSelectClearButton";
+            this.pageIDListBoxSelectClearButton.Size = new System.Drawing.Size(75, 23);
+            this.pageIDListBoxSelectClearButton.TabIndex = 12;
+            this.pageIDListBoxSelectClearButton.Text = "選択解除";
+            this.pageIDListBoxSelectClearButton.UseVisualStyleBackColor = true;
+            this.pageIDListBoxSelectClearButton.Click += new System.EventHandler(this.pageIDListBoxSelectClearButton_Click);
             // 
             // Form1
             // 
@@ -293,6 +342,10 @@
         private System.Windows.Forms.Button doAsignListButton;
         private System.Windows.Forms.Button openAsFolderButton;
         private System.Windows.Forms.CheckBox basicAuthFlagCheck;
+        private System.Windows.Forms.Button doPageIDLoadFromTsvButton;
+        private System.Windows.Forms.Button doPageIDsScreenShotButton;
+        private System.Windows.Forms.Button pageIDListBoxSelectClearButton;
+        private System.Windows.Forms.Button pageIDListBoxSelectAllButton;
     }
 }
 

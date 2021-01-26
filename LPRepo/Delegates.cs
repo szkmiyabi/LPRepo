@@ -77,6 +77,22 @@ namespace LPRepo
             return flag;
         }
 
+        //デリゲート（タスクのキャンセル判定とキャンセル実行処理、TSV処理用）
+        private delegate Boolean _task_cancel_tsv();
+        private Boolean task_cancel_tsv()
+        {
+            Boolean flag = false;
+            if (token.IsCancellationRequested)
+            {
+                operationStatusReport.AppendText("処理をキャンセルします。（" + DateUtil.get_logtime() + "）" + "\r\n");
+                token_src.Dispose();
+                token_src = null;
+                operationStatusReport.AppendText("処理をしました。（" + DateUtil.get_logtime() + "）" + "\r\n");
+                flag = true;
+            }
+            return flag;
+        }
+
         //デリゲート（コントロールの有効無効制御）
         private delegate void _ctrl_toggle(string ctrl_name);
         private void ctrl_toggle(string ctrl_name)
@@ -167,6 +183,21 @@ namespace LPRepo
         {
             if (pageIDListBox.SelectedItems.Count == 0) return false;
             else return true;
+        }
+
+        //デリゲート（サイトIDコンボ選択値（PID＋サイト名）を取得）
+        private delegate string _get_projectID_row();
+        private string get_projectID_row()
+        {
+            string line = "";
+            List<List<string>> data = new List<List<string>>();
+            foreach (projectIDComboItem cmb in projectIDListBox.SelectedItems)
+            {
+                string pid = cmb.id_str;
+                string name = cmb.display_str;
+                line = pid + "_" + name;
+            }
+            return line;
         }
 
         //デリゲート（ページIDコンボ選択値を取得）

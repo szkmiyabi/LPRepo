@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -161,6 +162,31 @@ namespace LPRepo
                 this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
 
             });
+        }
+
+        //ページIDコンボをTSVからセット
+        private void set_pageID_combo_from_tsv()
+        {
+            //デリゲートインスタンス
+            _write_log __write_log = write_log;
+            _set_projectID_combo __set_projectID_combo = set_projectID_combo;
+            _set_pageID_combo __set_pageID_combo = set_pageID_combo;
+
+            string filepath = getFileNameFromDialog();
+            if (filepath == "") return;
+
+            string filename_str = Path.GetFileNameWithoutExtension(filepath);
+            List<List<string>> projectData = new List<List<string>>
+            {
+                new List<string> { "T0", filename_str }
+            };
+
+            List<List<string>> pageIDData = new List<List<string>>();
+            pageIDData = getTextLineList(filepath);
+            this.Invoke(__set_projectID_combo, projectData);
+            this.Invoke(__set_pageID_combo, pageIDData);
+            this.Invoke(__write_log, "ページIDコンボが設定完了しました。（" + DateUtil.get_logtime() + "）");
+            this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
         }
     }
 }
