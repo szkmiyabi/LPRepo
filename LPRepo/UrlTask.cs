@@ -297,6 +297,7 @@ namespace LPRepo
 
                 //保存先ディレクトリ生成
                 string project_dir = (string)this.Invoke(__get_projectID_row);
+                project_dir = project_dir.Replace("/", "");
                 string save_path = (string)this.Invoke(__get_workDir) + project_dir + @"\";
                 if (!Directory.Exists(save_path)) Directory.CreateDirectory(save_path);
 

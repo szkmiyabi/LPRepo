@@ -215,5 +215,16 @@ namespace LPRepo
             SendMessage(pageIDListBox.Handle, LB_SETSEL, 0, -1);
             pageIDListBox.SetSelected(0, false);
         }
+
+        private async void libraPlusReportFormatButton_Click(object sender, EventArgs e)
+        {
+            string excel_path = getExcelFileNameFromDialog();
+            if (excel_path == "") return;
+            ExcelUtil eu = new ExcelUtil();
+            eu.currentWbPath = excel_path;
+            eu.saveDirPath = workDir + @"\";
+            eu.initCurrentBook();
+            await eu.lpReportFormat();
+        }
     }
 }

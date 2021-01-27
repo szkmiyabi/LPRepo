@@ -153,12 +153,17 @@ namespace LPRepo
             Bitmap gcImg = getImageFromResource("gc24.png");
             Bitmap folderImg = getImageFromResource("folder24.png");
             Bitmap settingImg = getImageFromResource("setting24.png");
-            Bitmap excelImg = getImageFromResource("ico-excel-21.png");
+            Bitmap excelImg = getImageFromResource("ico-excel.png");
             Bitmap gridImg = getImageFromResource("ico-grid-21.png");
             Bitmap loadImg = getImageFromResource("ico-load.png");
             Bitmap debugImg = getImageFromResource("icon-debug.png");
             Bitmap tsvImg = getImageFromResource("ico-tsv.png");
             Bitmap grpImg = getImageFromResource("ico-group.png");
+            Bitmap lprImg = getImageFromResource("lpr-logo.png");
+            Bitmap scImg = getImageFromResource("ico-sc.png");
+            Bitmap selectAllImg = getImageFromResource("select-all.png");
+            Bitmap selectCrImg = getImageFromResource("select-clear.png");
+            Bitmap loadTsvImg = getImageFromResource("ico-tsv-load.png");
             openAsSettingButton.Image = settingImg;
             createSiteInfoBookButton.Image = excelImg;
             projectIDLoadButton.Image = loadImg;
@@ -168,6 +173,11 @@ namespace LPRepo
             doUrlTaksFormatTextButton.Image = tsvImg;
             doAsignListButton.Image = grpImg;
             openAsFolderButton.Image = folderImg;
+            libraPlusReportFormatButton.Image = lprImg;
+            doPageIDsScreenShotButton.Image = scImg;
+            pageIDListBoxSelectAllButton.Image = selectAllImg;
+            pageIDListBoxSelectClearButton.Image = selectCrImg;
+            doPageIDLoadFromTsvButton.Image = loadTsvImg;
         }
 
         //ファイル選択ダイアログを表示
@@ -175,8 +185,21 @@ namespace LPRepo
         {
             string filename = "";
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "";
+            ofd.Filter = "テキストファイル(*.txt)|*.txt";
             if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                filename = ofd.FileName;
+            }
+            return filename;
+        }
+
+        //Excelファイル選択ダイアログを表示
+        private string getExcelFileNameFromDialog()
+        {
+            string filename = "";
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Excelワークブック(*.xlsx)|*.xlsx";
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 filename = ofd.FileName;
             }

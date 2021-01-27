@@ -188,5 +188,6 @@ namespace LPRepo
             this.Invoke(__write_log, "ページIDコンボが設定完了しました。（" + DateUtil.get_logtime() + "）");
             this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
         }
+
     }
 }

@@ -36,6 +36,10 @@
             this.projectIDLoadButton = new System.Windows.Forms.Button();
             this.projectIDListBox = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pageIDListBoxSelectClearButton = new System.Windows.Forms.Button();
+            this.pageIDListBoxSelectAllButton = new System.Windows.Forms.Button();
+            this.doPageIDsScreenShotButton = new System.Windows.Forms.Button();
+            this.doPageIDLoadFromTsvButton = new System.Windows.Forms.Button();
             this.doAsignListButton = new System.Windows.Forms.Button();
             this.doUrlTaksFormatExcelButton = new System.Windows.Forms.Button();
             this.doUrlTaksFormatTextButton = new System.Windows.Forms.Button();
@@ -49,10 +53,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
-            this.doPageIDLoadFromTsvButton = new System.Windows.Forms.Button();
-            this.doPageIDsScreenShotButton = new System.Windows.Forms.Button();
-            this.pageIDListBoxSelectAllButton = new System.Windows.Forms.Button();
-            this.pageIDListBoxSelectClearButton = new System.Windows.Forms.Button();
+            this.libraPlusReportFormatButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -93,7 +94,7 @@
             // 
             // createSiteInfoBookButton
             // 
-            this.createSiteInfoBookButton.Location = new System.Drawing.Point(47, 124);
+            this.createSiteInfoBookButton.Location = new System.Drawing.Point(42, 125);
             this.createSiteInfoBookButton.Name = "createSiteInfoBookButton";
             this.createSiteInfoBookButton.Size = new System.Drawing.Size(35, 35);
             this.createSiteInfoBookButton.TabIndex = 2;
@@ -136,9 +137,45 @@
             this.panel2.Size = new System.Drawing.Size(482, 168);
             this.panel2.TabIndex = 1;
             // 
+            // pageIDListBoxSelectClearButton
+            // 
+            this.pageIDListBoxSelectClearButton.Location = new System.Drawing.Point(437, 126);
+            this.pageIDListBoxSelectClearButton.Name = "pageIDListBoxSelectClearButton";
+            this.pageIDListBoxSelectClearButton.Size = new System.Drawing.Size(35, 35);
+            this.pageIDListBoxSelectClearButton.TabIndex = 12;
+            this.pageIDListBoxSelectClearButton.UseVisualStyleBackColor = true;
+            this.pageIDListBoxSelectClearButton.Click += new System.EventHandler(this.pageIDListBoxSelectClearButton_Click);
+            // 
+            // pageIDListBoxSelectAllButton
+            // 
+            this.pageIDListBoxSelectAllButton.Location = new System.Drawing.Point(402, 126);
+            this.pageIDListBoxSelectAllButton.Name = "pageIDListBoxSelectAllButton";
+            this.pageIDListBoxSelectAllButton.Size = new System.Drawing.Size(35, 35);
+            this.pageIDListBoxSelectAllButton.TabIndex = 11;
+            this.pageIDListBoxSelectAllButton.UseVisualStyleBackColor = true;
+            this.pageIDListBoxSelectAllButton.Click += new System.EventHandler(this.pageIDListBoxSelectAllButton_Click);
+            // 
+            // doPageIDsScreenShotButton
+            // 
+            this.doPageIDsScreenShotButton.Location = new System.Drawing.Point(274, 127);
+            this.doPageIDsScreenShotButton.Name = "doPageIDsScreenShotButton";
+            this.doPageIDsScreenShotButton.Size = new System.Drawing.Size(35, 35);
+            this.doPageIDsScreenShotButton.TabIndex = 10;
+            this.doPageIDsScreenShotButton.UseVisualStyleBackColor = true;
+            this.doPageIDsScreenShotButton.Click += new System.EventHandler(this.doPageIDsScreenShotButton_Click);
+            // 
+            // doPageIDLoadFromTsvButton
+            // 
+            this.doPageIDLoadFromTsvButton.Location = new System.Drawing.Point(50, 127);
+            this.doPageIDLoadFromTsvButton.Name = "doPageIDLoadFromTsvButton";
+            this.doPageIDLoadFromTsvButton.Size = new System.Drawing.Size(35, 35);
+            this.doPageIDLoadFromTsvButton.TabIndex = 9;
+            this.doPageIDLoadFromTsvButton.UseVisualStyleBackColor = true;
+            this.doPageIDLoadFromTsvButton.Click += new System.EventHandler(this.doPageIDLoadFromTsvButton_Click);
+            // 
             // doAsignListButton
             // 
-            this.doAsignListButton.Location = new System.Drawing.Point(138, 127);
+            this.doAsignListButton.Location = new System.Drawing.Point(186, 127);
             this.doAsignListButton.Name = "doAsignListButton";
             this.doAsignListButton.Size = new System.Drawing.Size(35, 35);
             this.doAsignListButton.TabIndex = 8;
@@ -147,7 +184,7 @@
             // 
             // doUrlTaksFormatExcelButton
             // 
-            this.doUrlTaksFormatExcelButton.Location = new System.Drawing.Point(56, 128);
+            this.doUrlTaksFormatExcelButton.Location = new System.Drawing.Point(116, 127);
             this.doUrlTaksFormatExcelButton.Name = "doUrlTaksFormatExcelButton";
             this.doUrlTaksFormatExcelButton.Size = new System.Drawing.Size(35, 35);
             this.doUrlTaksFormatExcelButton.TabIndex = 7;
@@ -156,7 +193,7 @@
             // 
             // doUrlTaksFormatTextButton
             // 
-            this.doUrlTaksFormatTextButton.Location = new System.Drawing.Point(97, 127);
+            this.doUrlTaksFormatTextButton.Location = new System.Drawing.Point(151, 127);
             this.doUrlTaksFormatTextButton.Name = "doUrlTaksFormatTextButton";
             this.doUrlTaksFormatTextButton.Size = new System.Drawing.Size(35, 35);
             this.doUrlTaksFormatTextButton.TabIndex = 6;
@@ -203,6 +240,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.libraPlusReportFormatButton);
             this.panel5.Controls.Add(this.openAsFolderButton);
             this.panel5.Controls.Add(this.debugButton);
             this.panel5.Controls.Add(this.openAsSettingButton);
@@ -256,45 +294,14 @@
             this.operationStatusReport.Size = new System.Drawing.Size(704, 128);
             this.operationStatusReport.TabIndex = 0;
             // 
-            // doPageIDLoadFromTsvButton
+            // libraPlusReportFormatButton
             // 
-            this.doPageIDLoadFromTsvButton.Location = new System.Drawing.Point(194, 127);
-            this.doPageIDLoadFromTsvButton.Name = "doPageIDLoadFromTsvButton";
-            this.doPageIDLoadFromTsvButton.Size = new System.Drawing.Size(69, 38);
-            this.doPageIDLoadFromTsvButton.TabIndex = 9;
-            this.doPageIDLoadFromTsvButton.Text = "TSVからロード";
-            this.doPageIDLoadFromTsvButton.UseVisualStyleBackColor = true;
-            this.doPageIDLoadFromTsvButton.Click += new System.EventHandler(this.doPageIDLoadFromTsvButton_Click);
-            // 
-            // doPageIDsScreenShotButton
-            // 
-            this.doPageIDsScreenShotButton.Location = new System.Drawing.Point(269, 126);
-            this.doPageIDsScreenShotButton.Name = "doPageIDsScreenShotButton";
-            this.doPageIDsScreenShotButton.Size = new System.Drawing.Size(41, 39);
-            this.doPageIDsScreenShotButton.TabIndex = 10;
-            this.doPageIDsScreenShotButton.Text = "SC";
-            this.doPageIDsScreenShotButton.UseVisualStyleBackColor = true;
-            this.doPageIDsScreenShotButton.Click += new System.EventHandler(this.doPageIDsScreenShotButton_Click);
-            // 
-            // pageIDListBoxSelectAllButton
-            // 
-            this.pageIDListBoxSelectAllButton.Location = new System.Drawing.Point(316, 133);
-            this.pageIDListBoxSelectAllButton.Name = "pageIDListBoxSelectAllButton";
-            this.pageIDListBoxSelectAllButton.Size = new System.Drawing.Size(75, 23);
-            this.pageIDListBoxSelectAllButton.TabIndex = 11;
-            this.pageIDListBoxSelectAllButton.Text = "全選択";
-            this.pageIDListBoxSelectAllButton.UseVisualStyleBackColor = true;
-            this.pageIDListBoxSelectAllButton.Click += new System.EventHandler(this.pageIDListBoxSelectAllButton_Click);
-            // 
-            // pageIDListBoxSelectClearButton
-            // 
-            this.pageIDListBoxSelectClearButton.Location = new System.Drawing.Point(397, 133);
-            this.pageIDListBoxSelectClearButton.Name = "pageIDListBoxSelectClearButton";
-            this.pageIDListBoxSelectClearButton.Size = new System.Drawing.Size(75, 23);
-            this.pageIDListBoxSelectClearButton.TabIndex = 12;
-            this.pageIDListBoxSelectClearButton.Text = "選択解除";
-            this.pageIDListBoxSelectClearButton.UseVisualStyleBackColor = true;
-            this.pageIDListBoxSelectClearButton.Click += new System.EventHandler(this.pageIDListBoxSelectClearButton_Click);
+            this.libraPlusReportFormatButton.Location = new System.Drawing.Point(8, 17);
+            this.libraPlusReportFormatButton.Name = "libraPlusReportFormatButton";
+            this.libraPlusReportFormatButton.Size = new System.Drawing.Size(35, 35);
+            this.libraPlusReportFormatButton.TabIndex = 2;
+            this.libraPlusReportFormatButton.UseVisualStyleBackColor = true;
+            this.libraPlusReportFormatButton.Click += new System.EventHandler(this.libraPlusReportFormatButton_Click);
             // 
             // Form1
             // 
@@ -346,6 +353,7 @@
         private System.Windows.Forms.Button doPageIDsScreenShotButton;
         private System.Windows.Forms.Button pageIDListBoxSelectClearButton;
         private System.Windows.Forms.Button pageIDListBoxSelectAllButton;
+        private System.Windows.Forms.Button libraPlusReportFormatButton;
     }
 }
 

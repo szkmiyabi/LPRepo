@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,79 @@ namespace LPRepo
     {
         private Form1 main_form;
 
+        private XLWorkbook _currentWb;
+        private IXLWorksheet _currentWs;
+        private string _currentWbPath;
+        private string _saveDirPath;
+
         //コンストラクタ
         public ExcelUtil()
         {
             main_form = Form1.main_form;
+
+            //LibraPlus前検査結果レポート用フィールド（デフォルトは値未設定）
+            _currentWb = null;
+            _currentWs = null;
+            _currentWbPath = "";
+            _saveDirPath = "";
+        }
+
+        //ゲッターとセッター
+        public string currentWbPath
+        {
+            get { return _currentWbPath; }
+            set { _currentWbPath = value; }
+        }
+        public string saveDirPath
+        {
+            get { return _saveDirPath; }
+            set { _saveDirPath = value; }
+        }
+
+        //カレントWorkbookをセット
+        public void initCurrentBook()
+        {
+            _currentWb = new XLWorkbook(_currentWbPath);
+        }
+
+        //カレントWorkbookのカレントSheetをセット
+        private void initCurrentWorksheet(int idx)
+        {
+            _currentWs = _currentWb.Worksheet(idx);
+        }
+
+        //カレントWorkbookのカレントSheetをセット（オーバーライド）
+        private void initCurrentWorksheet(string sname)
+        {
+            _currentWs = _currentWb.Worksheets.Worksheet(sname);
+        }
+
+        //カレントSheetのデータ範囲開始行を取得
+        private int getStartRow()
+        {
+            var first = _currentWs.FirstCellUsed();
+            return first.WorksheetRow().RowNumber();
+        }
+
+        //カレントSheetのデータ範囲最終行を取得
+        private int getEndRow()
+        {
+            var last = _currentWs.LastCellUsed();
+            return last.WorksheetRow().RowNumber();
+        }
+
+        //カレントSheetのデータ範囲開始列を取得
+        private int getStartCol()
+        {
+            var first = _currentWs.FirstCellUsed();
+            return first.WorksheetColumn().ColumnNumber();
+        }
+
+        //カレントSheetのデータ範囲最終列を取得
+        private int getEndCol()
+        {
+            var last = _currentWs.LastCellUsed();
+            return last.WorksheetColumn().ColumnNumber();
         }
 
         //デリゲート
@@ -24,6 +94,128 @@ namespace LPRepo
         public void write_log(string msg)
         {
             main_form.operationStatusReport.AppendText(msg + "\r\n");
+        }
+
+        //罫線自動描画
+        private async Task tableBorderedAsync()
+        {
+            await Task.Run(() =>
+            {
+                //デリゲートインスタンス
+                _write_log __write_log = write_log;
+
+                //最初のワークシートをアクティブにする
+                initCurrentWorksheet(1);
+
+                main_form.Invoke(__write_log, "罫線描画を開始します....");
+
+                int r = getStartRow();
+                int rx = getEndRow();
+                int cx = getEndCol();
+
+                for (int i = r; i <= rx; i++)
+                {
+                    main_form.Invoke(__write_log, i + "行目の処理....");
+                    for (int j = 1; j <= cx; j++)
+                    {
+                        _currentWs.Cell(i, j).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                        _currentWs.Cell(i, j).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                        _currentWs.Cell(i, j).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                        _currentWs.Cell(i, j).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                        _currentWs.Cell(i, j).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+
+                    }
+                }
+
+                main_form.Invoke(__write_log, "罫線描画の処理が完了しました....");
+            });
+        }
+
+        //LibraPlusの検査結果一覧表を書式設定する（LibraPlus全検査結果レポートフォーマット）
+        public async Task lpReportFormat()
+        {
+            await Task.Run(() =>
+            {
+                //デリゲートインスタンス
+                _write_log __write_log = write_log;
+
+                //罫線描画（処理完了まで待機）
+                tableBorderedAsync().Wait();
+
+                //最初のワークシートをアクティブにする
+                initCurrentWorksheet(1);
+
+                main_form.Invoke(__write_log, "LibraPlus全検査結果レポートのフォーマット処理を開始します....");
+
+                int r = getStartRow();
+                int rx = getEndRow();
+                int cx = getEndCol();
+
+                int sv_index = 6;
+
+                for (int i = r; i <= rx; i++)
+                {
+
+                    main_form.Invoke(__write_log, i + "行目の処理....");
+
+                    for (int j = 1; j <= cx; j++)
+                    {
+
+                        //header cell
+                        if (i == 1)
+                        {
+                            _currentWs.Cell(i, j).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                            _currentWs.Cell(i, j).Style.Font.Bold = true;
+
+                            //列幅指定
+                            double[] colWidthArr = { 8.4, 8.4, 13.9, 45.6, 24, 8.4, 6.1, 45.2, 45.2, 45.2, 8.4, 8.4 };
+                            int wcnt = 1;
+                            foreach (double wc in colWidthArr)
+                            {
+                                _currentWs.Column(wcnt).Width = wc;
+                                wcnt++;
+                            }
+                        }
+                        //data cell
+                        else
+                        {
+
+                            string sv_val = (string)_currentWs.Cell(i, sv_index).Value;
+
+                            if (sv_val == "はい")
+                            {
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0x89FFFF);
+                            }
+                            else if (sv_val == "はい(注記)")
+                            {
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0x99FF99);
+                            }
+                            else if (sv_val == "いいえ")
+                            {
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFFB3B3);
+                            }
+                            else if (sv_val == "なし")
+                            {
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xDDDDDD);
+                            }
+                        }
+
+                    }
+                }
+
+                main_form.Invoke(__write_log, "LibraPlus全検査結果レポートのフォーマット処理が完了しました....");
+
+                //保存の段取り
+                string new_filename = Path.GetFileNameWithoutExtension(_currentWbPath);
+                string ext = Path.GetExtension(_currentWbPath);
+                string new_savepath = _saveDirPath + new_filename + "_" + DateUtil.fetch_filename_logtime() + ext;
+
+                //別名保存
+                _currentWb.SaveAs(new_savepath);
+                main_form.Invoke(__write_log, "処理が完了しました。出力ファイル：" + new_savepath);
+
+            });
+
         }
 
         //最大文字数32767に収める

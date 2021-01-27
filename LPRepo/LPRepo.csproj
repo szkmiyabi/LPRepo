@@ -159,14 +159,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LPRIcon.ico" />
-    <EmbeddedResource Include="resources\ico-group.png" />
     <EmbeddedResource Include="resources\ico-tsv.png" />
+    <EmbeddedResource Include="resources\ico-excel.png" />
+    <EmbeddedResource Include="resources\ico-tsv-load.png" />
+    <EmbeddedResource Include="resources\ico-load.png" />
+    <EmbeddedResource Include="resources\lpr-logo.png" />
+    <EmbeddedResource Include="resources\select-all.png" />
+    <EmbeddedResource Include="resources\select-clear.png" />
+    <EmbeddedResource Include="resources\ico-group.png" />
+    <EmbeddedResource Include="resources\ico-sc.png" />
     <EmbeddedResource Include="resources\ff24.png" />
     <EmbeddedResource Include="resources\folder24.png" />
     <EmbeddedResource Include="resources\gc24.png" />
-    <EmbeddedResource Include="resources\ico-excel-21.png" />
     <EmbeddedResource Include="resources\ico-grid-21.png" />
-    <EmbeddedResource Include="resources\ico-load.png" />
     <EmbeddedResource Include="resources\ie24.png" />
     <EmbeddedResource Include="resources\setting24.png" />
   </ItemGroup>
