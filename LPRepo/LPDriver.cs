@@ -425,6 +425,25 @@ namespace LPRepo
             return ret;
         }
 
+        //カテゴリ一覧を取得（進捗管理画面から）
+        public List<string> get_category_list_data_from_status_page()
+        {
+            List<string> data = new List<string>();
+            var tbl = _wd.FindElement(By.Id("myTable"));
+            var tbl_hd = tbl.FindElement(By.TagName("thead"));
+            var trs = tbl_hd.FindElements(By.TagName("tr"));
+            IWebElement tr = trs.ElementAt<IWebElement>(1);
+            var ths = tr.FindElements(By.TagName("th"));
+            int nx = ths.Count<IWebElement>() - 1;
+            for(int i=0; i<nx; i++)
+            {
+                IWebElement th = ths.ElementAt<IWebElement>(i);
+                string tx = th.Text.TrimStart().TrimEnd();
+                data.Add(tx);
+            }
+            return data;
+        }
+
         //カテゴリタブを選択
         public void select_category(int nx)
         {
