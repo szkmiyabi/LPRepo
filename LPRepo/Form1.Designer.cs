@@ -48,12 +48,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.debugButton = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.libraPlusReportFormatButton = new System.Windows.Forms.Button();
             this.openAsFolderButton = new System.Windows.Forms.Button();
             this.openAsSettingButton = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
-            this.libraPlusReportFormatButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -231,9 +231,9 @@
             // 
             // debugButton
             // 
-            this.debugButton.Location = new System.Drawing.Point(628, 17);
+            this.debugButton.Location = new System.Drawing.Point(680, 17);
             this.debugButton.Name = "debugButton";
-            this.debugButton.Size = new System.Drawing.Size(81, 39);
+            this.debugButton.Size = new System.Drawing.Size(35, 35);
             this.debugButton.TabIndex = 0;
             this.debugButton.UseVisualStyleBackColor = true;
             this.debugButton.Click += new System.EventHandler(this.debugButton_Click);
@@ -249,9 +249,18 @@
             this.panel5.Size = new System.Drawing.Size(725, 70);
             this.panel5.TabIndex = 4;
             // 
+            // libraPlusReportFormatButton
+            // 
+            this.libraPlusReportFormatButton.Location = new System.Drawing.Point(8, 17);
+            this.libraPlusReportFormatButton.Name = "libraPlusReportFormatButton";
+            this.libraPlusReportFormatButton.Size = new System.Drawing.Size(35, 35);
+            this.libraPlusReportFormatButton.TabIndex = 2;
+            this.libraPlusReportFormatButton.UseVisualStyleBackColor = true;
+            this.libraPlusReportFormatButton.Click += new System.EventHandler(this.libraPlusReportFormatButton_Click);
+            // 
             // openAsFolderButton
             // 
-            this.openAsFolderButton.Location = new System.Drawing.Point(572, 17);
+            this.openAsFolderButton.Location = new System.Drawing.Point(623, 17);
             this.openAsFolderButton.Name = "openAsFolderButton";
             this.openAsFolderButton.Size = new System.Drawing.Size(35, 35);
             this.openAsFolderButton.TabIndex = 1;
@@ -260,7 +269,7 @@
             // 
             // openAsSettingButton
             // 
-            this.openAsSettingButton.Location = new System.Drawing.Point(531, 17);
+            this.openAsSettingButton.Location = new System.Drawing.Point(582, 17);
             this.openAsSettingButton.Name = "openAsSettingButton";
             this.openAsSettingButton.Size = new System.Drawing.Size(35, 35);
             this.openAsSettingButton.TabIndex = 0;
@@ -293,15 +302,6 @@
             this.operationStatusReport.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.operationStatusReport.Size = new System.Drawing.Size(704, 128);
             this.operationStatusReport.TabIndex = 0;
-            // 
-            // libraPlusReportFormatButton
-            // 
-            this.libraPlusReportFormatButton.Location = new System.Drawing.Point(8, 17);
-            this.libraPlusReportFormatButton.Name = "libraPlusReportFormatButton";
-            this.libraPlusReportFormatButton.Size = new System.Drawing.Size(35, 35);
-            this.libraPlusReportFormatButton.TabIndex = 2;
-            this.libraPlusReportFormatButton.UseVisualStyleBackColor = true;
-            this.libraPlusReportFormatButton.Click += new System.EventHandler(this.libraPlusReportFormatButton_Click);
             // 
             // Form1
             // 

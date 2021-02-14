@@ -340,6 +340,52 @@ namespace LPRepo
             }
         }
 
+        //作業割り当て表Excelファイル出力（検査箇所数付）
+        public void save_asignlist_with_count_xlsx_as(List<List<string>> data, string filename)
+        {
+            _write_log __write_log = write_log;
+
+            try
+            {
+                using (var wb = new ClosedXML.Excel.XLWorkbook())
+                {
+                    var ws = wb.Worksheets.Add("Sheet1");
+
+                    //行のループ
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        List<string> row = (List<string>)data[i];
+
+                        //列のループ
+                        for (int j = 0; j < row.Count; j++)
+                        {
+                            string col = (string)row[j];
+                            ws.Cell(i + 1, j + 1).SetValue<string>((string)row[j]);
+                            ws.Cell(i + 1, j + 1).SetValue<string>(fetch_overflow_characters(col));
+                            ws.Cell(i + 1, j + 1).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Font.FontName = "ＭＳ Ｐゴシック";
+                            ws.Cell(i + 1, j + 1).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                            if(i==0 && j > 1)
+                            {
+                                ws.Cell(i + 1, j + 1).Style.Alignment.TopToBottom = true;
+                            }
+                        }
+
+                    }
+                    wb.SaveAs(filename);
+                    main_form.Invoke(__write_log, "保存に成功しました。（" + filename + "）");
+                }
+            }
+            catch (Exception ex)
+            {
+                main_form.Invoke(__write_log, "【エラー】" + ex.Message);
+                return;
+            }
+        }
+
         //カテゴリ別検査項目一覧表Excelファイル作成
         public void save_category_by_details_xlsx(List<List<object>> data, string filename)
         {

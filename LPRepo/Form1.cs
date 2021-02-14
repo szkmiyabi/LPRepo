@@ -104,7 +104,8 @@ namespace LPRepo
         private void debugButton_Click(object sender, EventArgs e)
         {
             //do_create_category_by_details();
-            do_create_asignlist_details_xlsx();
+            //do_create_asignlist_details_xlsx();
+            //do_create_asignlist_with_count_xlsx();
         }
 
         //サイトID読込クリック
@@ -171,7 +172,7 @@ namespace LPRepo
             token_src = new CancellationTokenSource();
             token = token_src.Token;
             //処理実行
-            do_create_asignlist_xlsx();
+            do_create_asignlist_with_count_xlsx();
         }
 
         //作業フォルダボタンクリック

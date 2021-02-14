@@ -444,6 +444,61 @@ namespace LPRepo
             return data;
         }
 
+        //進捗管理表データを取得
+        public List<List<string>> get_status_all_table_data()
+        {
+            List<List<string>> data = new List<List<string>>();
+            List<string> head_row = new List<string>();
+
+            var tbl = _wd.FindElement(By.Id("myTable"));
+            var tbl_hd = tbl.FindElement(By.TagName("thead"));
+            var trs = tbl_hd.FindElements(By.TagName("tr"));
+            IWebElement tr = trs.ElementAt<IWebElement>(1);
+            var ths = tr.FindElements(By.TagName("th"));
+            int nx = ths.Count<IWebElement>() - 1;
+
+            head_row.Add("管理番号");
+            head_row.Add("URL");
+            for (int i = 0; i < nx; i++)
+            {
+                IWebElement th = ths.ElementAt<IWebElement>(i);
+                string tx = th.Text.TrimStart().TrimEnd();
+                head_row.Add(tx);
+            }
+
+            data.Add(head_row);
+
+            var tbl_bd = tbl.FindElement(By.TagName("tbody"));
+            var trs_bd = tbl_bd.FindElements(By.TagName("tr"));
+            var nx_bd = trs_bd.Count<IWebElement>() - 1;
+            for(int i=0; i<nx_bd; i++)
+            {
+                IWebElement tr_bd = trs_bd.ElementAt<IWebElement>(i);
+                var tds = tr_bd.FindElements(By.TagName("td"));
+                int tdnx = tds.Count<IWebElement>() - 1;
+                List<string> row = new List<string>();
+                for(int j=0; j<tdnx; j++)
+                {
+                    if (j == 2) continue;
+                    IWebElement td = tds.ElementAt<IWebElement>(j);
+                    string val = "";
+                    if(j==0 || j==1)
+                    {
+                        val = td.Text.TrimStart().TrimEnd();
+                    }
+                    else
+                    {
+                        var atg = td.FindElement(By.TagName("a"));
+                        val = atg.Text.TrimStart().TrimEnd();
+                    }
+                    row.Add(val);
+                }
+                data.Add(row);
+            }
+
+            return data; 
+        }
+
         //カテゴリタブを選択
         public void select_category(int nx)
         {
