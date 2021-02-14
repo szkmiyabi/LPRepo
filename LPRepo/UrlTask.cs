@@ -83,6 +83,7 @@ namespace LPRepo
                 _get_workDir __get_workDir = get_workDir;
                 _get_projectID __get_projectID = get_projectID;
                 _get_pageID_rows __get_page_rows = get_pageID_rows;
+                _get_site_name_by_projectIDCombo __get_site_name_by_projectIDCombo = get_site_name_by_projectIDCombo;
 
                 //Basic認証のON時の条件判定
                 if (!(Boolean)this.Invoke(__is_basic_auth_condition)) return;
@@ -104,13 +105,13 @@ namespace LPRepo
                 List<List<string>> data = new List<List<string>>();
                 string site_name = "";
 
-                this.Invoke(__write_log, "検査メイン画面に移動します。（" + DateUtil.get_logtime() + "）");
-                ldr.browse_sv_mainpage();
-                DateUtil.app_sleep(longWait);
+                //タスクのキャンセル判定
+                if ((Boolean)this.Invoke(__task_cancel)) return;
 
-                site_name = ldr.get_site_name();
-                data = ldr.get_page_list_data_from_svpage();
-
+                this.Invoke(__write_log, "進捗管理画面ページにアクセスしています。（" + DateUtil.get_logtime() + "）");
+                ldr.init_status_page();
+                data = ldr.get_page_list_data_from_status_page();
+                site_name = (string)this.Invoke(__get_site_name_by_projectIDCombo);
 
                 //タスクのキャンセル判定
                 if ((Boolean)this.Invoke(__task_cancel)) return;
