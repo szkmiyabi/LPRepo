@@ -34,6 +34,8 @@ namespace LPRepo
         private string completed_site_url = "https://jis2.infocreate.co.jp/libraplus/site/list/1";
         private string sv_mainpage_url_base = "http://jis2.infocreate.co.jp/libraplus/inspect/start/index/";
 
+        private string status_list_url = "https://jis2.infocreate.co.jp/libraplus/status/list/";
+
         private string _basic_auth_flag;
         private Boolean _basic_authenicated;
         private string workDir;
@@ -331,6 +333,65 @@ namespace LPRepo
                 ret = mc[0].Groups[2].Value;
             }
             return ret;
+        }
+
+        //進捗管理画面セットアップ（PID選択→表示ボタンクリック）
+        public void init_status_page()
+        {
+            Regex pt = new Regex(@"\[" + _projectID + @"\]");
+
+            _wd.Navigate().GoToUrl(status_list_url);
+            DateUtil.app_sleep(shortWait);
+
+            var select_pids_wrap = _wd.FindElement(By.Id("siteno"));
+            var select_pids = select_pids_wrap.FindElements(By.TagName("option"));
+            for (int i = 0; i < select_pids.Count<IWebElement>(); i++)
+            {
+                IWebElement op = select_pids.ElementAt<IWebElement>(i);
+                string op_txt = op.Text.TrimStart().TrimEnd();
+                if (pt.IsMatch(op_txt))
+                {
+                    op.Click();
+                    break;
+                }
+            }
+            DateUtil.app_sleep(shortWait);
+            var btns = _wd.FindElements(By.TagName("button"));
+            for (int i = 0; i < btns.Count<IWebElement>(); i++)
+            {
+                IWebElement btn = btns.ElementAt<IWebElement>(i);
+                string attr = btn.GetAttribute("value");
+                if (attr == "表示")
+                {
+                    btn.Click();
+                    break;
+                }
+            }
+            DateUtil.app_sleep(shortWait);
+        }
+
+        //PID+URL一覧データを生成（進捗管理画面から）
+        public List<List<string>> get_page_list_data_from_status_page()
+        {
+            List<List<string>> data = new List<List<string>>();
+            var tbl = _wd.FindElement(By.Id("myTable"));
+            var tbl_bd = tbl.FindElement(By.TagName("tbody"));
+            var trs = tbl_bd.FindElements(By.TagName("tr"));
+            int nx = trs.Count<IWebElement>() - 1;
+            for(int i=0; i<nx; i++)
+            {
+                IWebElement tr = trs.ElementAt<IWebElement>(i);
+                var tds = tr.FindElements(By.TagName("td"));
+                IWebElement td1 = tds.ElementAt<IWebElement>(0);
+                IWebElement td2 = tds.ElementAt<IWebElement>(1);
+                string pid = td1.Text.TrimStart().TrimEnd();
+                string url = td2.Text.TrimStart().TrimEnd();
+                List<string> row = new List<string>();
+                row.Add(pid);
+                row.Add(url);
+                data.Add(row);
+            }
+            return data;
         }
 
         //カテゴリ一覧を取得（検査メイン画面から）

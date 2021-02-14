@@ -146,10 +146,9 @@ namespace LPRepo
                 string cr = (string)this.Invoke(__get_projectID);
                 ldr.projectID = cr;
 
-                this.Invoke(__write_log, "検査メイン画面ページにアクセスしています。（" + DateUtil.get_logtime() + "）");
-                ldr.browse_sv_mainpage();
-                DateUtil.app_sleep(longWait);
-                List<List<string>> data = ldr.get_page_list_data_from_svpage();
+                this.Invoke(__write_log, "進捗管理画面ページにアクセスしています。（" + DateUtil.get_logtime() + "）");
+                ldr.init_status_page();
+                List<List<string>> data = ldr.get_page_list_data_from_status_page();
 
                 //タスクのキャンセル判定
                 if ((Boolean)this.Invoke(__task_cancel)) return;
