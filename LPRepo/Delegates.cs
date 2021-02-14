@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -197,6 +198,33 @@ namespace LPRepo
                 line = name;
             }
             return line;
+        }
+
+        //デリゲート（サイトIDコンボからサイト名を取得）
+        private delegate string _get_site_name_by_projectIDCombo();
+        private string get_site_name_by_projectIDCombo()
+        {
+            string line = "";
+            string sname = "";
+            Regex pt1 = new Regex(@"([0-9]+)( )(.+?)( / )");
+            Regex pt2 = new Regex(@"([0-9]+)( )(.+)");
+            List<List<string>> data = new List<List<string>>();
+            foreach (projectIDComboItem cmb in projectIDListBox.SelectedItems)
+            {
+                string name = cmb.display_str;
+                line = name;
+            }
+            if (pt1.IsMatch(line))
+            {
+                Match mt1 = pt1.Match(line);
+                sname = mt1.Groups[3].Value;
+            }
+            else if (pt2.IsMatch(line))
+            {
+                Match mt2 = pt2.Match(line);
+                sname = mt2.Groups[3].Value;
+            }
+            return sname.TrimStart().TrimEnd();
         }
 
         //デリゲート（ページIDコンボ選択値を取得）
