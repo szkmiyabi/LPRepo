@@ -217,6 +217,7 @@ namespace LPRepo
             pageIDListBox.SetSelected(0, false);
         }
 
+        //LibraPSエクセルフォーマットの整形クリック
         private async void libraPlusReportFormatButton_Click(object sender, EventArgs e)
         {
             string excel_path = getExcelFileNameFromDialog();
@@ -226,6 +227,12 @@ namespace LPRepo
             eu.saveDirPath = workDir + @"\";
             eu.initCurrentBook();
             await eu.lpReportFormat();
+        }
+
+        //カテゴリ別検査詳細リストクリック
+        private async void createCategoryByDetailsRepotButton_Click(object sender, EventArgs e)
+        {
+            await do_create_category_by_details();
         }
     }
 }

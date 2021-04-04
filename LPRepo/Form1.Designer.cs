@@ -54,6 +54,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.operationStatusReport = new System.Windows.Forms.TextBox();
+            this.createCategoryByDetailsRepotButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -122,6 +123,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.createCategoryByDetailsRepotButton);
             this.panel2.Controls.Add(this.pageIDListBoxSelectClearButton);
             this.panel2.Controls.Add(this.pageIDListBoxSelectAllButton);
             this.panel2.Controls.Add(this.doPageIDsScreenShotButton);
@@ -303,6 +305,15 @@
             this.operationStatusReport.Size = new System.Drawing.Size(704, 128);
             this.operationStatusReport.TabIndex = 0;
             // 
+            // createCategoryByDetailsRepotButton
+            // 
+            this.createCategoryByDetailsRepotButton.Location = new System.Drawing.Point(315, 127);
+            this.createCategoryByDetailsRepotButton.Name = "createCategoryByDetailsRepotButton";
+            this.createCategoryByDetailsRepotButton.Size = new System.Drawing.Size(35, 35);
+            this.createCategoryByDetailsRepotButton.TabIndex = 13;
+            this.createCategoryByDetailsRepotButton.UseVisualStyleBackColor = true;
+            this.createCategoryByDetailsRepotButton.Click += new System.EventHandler(this.createCategoryByDetailsRepotButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -354,6 +365,7 @@
         private System.Windows.Forms.Button pageIDListBoxSelectClearButton;
         private System.Windows.Forms.Button pageIDListBoxSelectAllButton;
         private System.Windows.Forms.Button libraPlusReportFormatButton;
+        private System.Windows.Forms.Button createCategoryByDetailsRepotButton;
     }
 }
 

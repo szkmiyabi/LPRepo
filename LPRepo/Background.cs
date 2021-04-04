@@ -164,6 +164,7 @@ namespace LPRepo
             Bitmap selectAllImg = getImageFromResource("select-all.png");
             Bitmap selectCrImg = getImageFromResource("select-clear.png");
             Bitmap loadTsvImg = getImageFromResource("ico-tsv-load.png");
+            Bitmap createListImg = getImageFromResource("ico-list.png");
             openAsSettingButton.Image = settingImg;
             createSiteInfoBookButton.Image = excelImg;
             projectIDLoadButton.Image = loadImg;
@@ -178,6 +179,7 @@ namespace LPRepo
             pageIDListBoxSelectAllButton.Image = selectAllImg;
             pageIDListBoxSelectClearButton.Image = selectCrImg;
             doPageIDLoadFromTsvButton.Image = loadTsvImg;
+            createCategoryByDetailsRepotButton.Image = createListImg;
         }
 
         //ファイル選択ダイアログを表示

@@ -9,10 +9,10 @@ namespace LPRepo
     partial class Form1
     {
         //カテゴリ別検査項目一覧表出力
-        private void do_create_category_by_details()
+        private async Task do_create_category_by_details()
         {
 
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 //デリゲートインスタンス
                 _write_log __write_log = write_log;
