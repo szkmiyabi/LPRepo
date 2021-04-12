@@ -178,6 +178,13 @@ namespace LPRepo
             _wd.Navigate().GoToUrl(working_site_url);
         }
 
+
+        //検査終了サイト一覧画面に遷移
+        public void completed_site_page()
+        {
+            _wd.Navigate().GoToUrl(completed_site_url);
+        }
+
         //シャットダウン
         public void shutdown()
         {

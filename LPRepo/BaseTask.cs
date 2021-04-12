@@ -39,11 +39,19 @@ namespace LPRepo
                 //タスクのキャンセル判定
                 if ((Boolean)this.Invoke(__task_cancel)) return;
 
+                List<List<string>> data = new List<List<string>>();
+
+                this.Invoke(__write_log, "検査中サイト一覧を取得しています。（" + DateUtil.get_logtime() + "）");
                 ldr.working_site_page();
                 DateUtil.app_sleep(shortWait);
+                data.AddRange(ldr.get_site_list());
 
-                this.Invoke(__write_log, "サイト一覧を取得しています。（" + DateUtil.get_logtime() + "）");
-                List<List<string>> data = new List<List<string>>();
+                //タスクのキャンセル判定
+                if ((Boolean)this.Invoke(__task_cancel)) return;
+
+                this.Invoke(__write_log, "検査終了サイト一覧を取得しています。（" + DateUtil.get_logtime() + "）");
+                ldr.completed_site_page();
+                DateUtil.app_sleep(shortWait);
                 data.AddRange(ldr.get_site_list());
 
                 //タスクのキャンセル判定
@@ -53,6 +61,9 @@ namespace LPRepo
                 this.Invoke(__write_log, "サイト名コンボが設定完了しました。（" + DateUtil.get_logtime() + "）");
                 ldr.logout();
                 this.Invoke(__write_log, "処理が完了しました。（" + DateUtil.get_logtime() + "）");
+
+
+
             });
 
         }
@@ -83,11 +94,20 @@ namespace LPRepo
                 ldr.login();
                 DateUtil.app_sleep(shortWait);
 
+                List<List<string>> data = new List<List<string>>();
 
+                //検査終了サイト一覧を取得
+                this.Invoke(__write_log, "検査中サイト一覧を取得しています。（" + DateUtil.get_logtime() + "）");
                 ldr.working_site_page();
                 DateUtil.app_sleep(shortWait);
+                data.AddRange(ldr.get_site_info_data());
 
-                List<List<string>> data = ldr.get_site_info_data();
+                this.Invoke(__write_log, "検査終了サイト一覧を取得しています。（" + DateUtil.get_logtime() + "）");
+                ldr.completed_site_page();
+                DateUtil.app_sleep(shortWait);
+                data.AddRange(ldr.get_site_info_data());
+
+
                 List<string> head_row = new List<string>() {
                     "ID",
                     "サイト名/備考",
