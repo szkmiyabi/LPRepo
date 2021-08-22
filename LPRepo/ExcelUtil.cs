@@ -19,6 +19,14 @@ namespace LPRepo
         private string _currentWbPath;
         private string _saveDirPath;
 
+        private string mm_sv_row;
+        private string mm_sv_comment;
+        private string mm_sv_description;
+        private string mm_sv_srccode;
+        private string mm_sv_register;
+        private string mm_sv_updater;
+
+
         //コンストラクタ
         public ExcelUtil()
         {
@@ -29,6 +37,13 @@ namespace LPRepo
             _currentWs = null;
             _currentWbPath = "";
             _saveDirPath = "";
+
+            mm_sv_row = "";
+            mm_sv_comment = "";
+            mm_sv_description = "";
+            mm_sv_srccode = "";
+            mm_sv_register = "";
+            mm_sv_updater = "";
         }
 
         //ゲッターとセッター
@@ -131,6 +146,127 @@ namespace LPRepo
             });
         }
 
+        private async Task tableRestruct()
+        {
+            await Task.Run(() =>
+            {
+                //デリゲートインスタンス
+                _write_log __write_log = write_log;
+
+                //最初のワークシートをアクティブにする
+                initCurrentWorksheet(1);
+
+                main_form.Invoke(__write_log, "表冗長化処理を開始します....");
+
+                int r = getStartRow();
+                int rx = getEndRow();
+                int cx = getEndCol();
+
+                for (int i = r; i <= rx; i++)
+                {
+                    main_form.Invoke(__write_log, i + "行目の処理....");
+
+                    //タイトル行をスキップ
+                    if (i == r) continue;
+
+                    for (int j = 1; j <= cx; j++)
+                    {
+                        //行番号セルの処理
+                        if (j == 7)
+                        {
+                            string cr_sv_row = "";
+                            string inq_sv_row = "";
+
+                            //数値セルを参照するため処理分岐
+                            Type t = _currentWs.Cell(i, j).Value.GetType();
+                            if (t.Equals(typeof(string)))
+                            {
+                                cr_sv_row = (string)_currentWs.Cell(i, j).Value;
+                            }
+                            else if (t.Equals(typeof(double)))
+                            {
+                                cr_sv_row = _currentWs.Cell(i, j).Value.ToString();
+                            }
+                            if(cr_sv_row == "〃〃")
+                            {
+                                inq_sv_row = _currentWs.Cell(i-1, j).Value.ToString();
+                                if (mm_sv_row != inq_sv_row) mm_sv_row = inq_sv_row;
+                                _currentWs.Cell(i, j).Value = mm_sv_row;
+                            }
+
+                        }
+                        //コメントセルの処理
+                        if(j == 8)
+                        {
+                            string cr_sv_comment = "";
+                            string inq_sv_comment = "";
+                            cr_sv_comment = (string)_currentWs.Cell(i, j).Value;
+                            if (cr_sv_comment == "〃〃")
+                            {
+                                inq_sv_comment = _currentWs.Cell(i - 1, j).Value.ToString();
+                                if (mm_sv_comment != inq_sv_comment) mm_sv_comment = inq_sv_comment;
+                                _currentWs.Cell(i, j).Value = mm_sv_comment;
+                            }
+                        }
+                        //対象ソースコードセルの処理
+                        if (j == 9)
+                        {
+                            string cr_sv_description = "";
+                            string inq_sv_description = "";
+                            cr_sv_description = (string)_currentWs.Cell(i, j).Value;
+                            if (cr_sv_description == "〃〃")
+                            {
+                                inq_sv_description = _currentWs.Cell(i - 1, j).Value.ToString();
+                                if (mm_sv_description != inq_sv_description) mm_sv_description = inq_sv_description;
+                                _currentWs.Cell(i, j).Value = mm_sv_description;
+                            }
+                        }
+                        //修正ソースコードセルの処理
+                        if (j == 10)
+                        {
+                            string cr_sv_srccode= "";
+                            string inq_sv_srccode = "";
+                            cr_sv_srccode = (string)_currentWs.Cell(i, j).Value;
+                            if (cr_sv_srccode == "〃〃")
+                            {
+                                inq_sv_srccode = _currentWs.Cell(i - 1, j).Value.ToString();
+                                if (mm_sv_srccode != inq_sv_srccode) mm_sv_srccode = inq_sv_srccode;
+                                _currentWs.Cell(i, j).Value = mm_sv_srccode;
+                            }
+                        }
+                        //登録者セルの処理
+                        if (j == 11)
+                        {
+                            string cr_sv_register = "";
+                            string inq_sv_register = "";
+                            cr_sv_register = (string)_currentWs.Cell(i, j).Value;
+                            if (cr_sv_register == "〃〃")
+                            {
+                                inq_sv_register = _currentWs.Cell(i - 1, j).Value.ToString();
+                                if (mm_sv_register != inq_sv_register) mm_sv_register = inq_sv_register;
+                                _currentWs.Cell(i, j).Value = mm_sv_register;
+                            }
+                        }
+                        //更新者セルの処理
+                        if (j == 12)
+                        {
+                            string cr_sv_updater = "";
+                            string inq_sv_updater = "";
+                            cr_sv_updater = (string)_currentWs.Cell(i, j).Value;
+                            if (cr_sv_updater == "〃〃")
+                            {
+                                inq_sv_updater = _currentWs.Cell(i - 1, j).Value.ToString();
+                                if (mm_sv_updater != inq_sv_updater) mm_sv_updater = inq_sv_updater;
+                                _currentWs.Cell(i, j).Value = mm_sv_updater;
+                            }
+                        }
+                    }
+                }
+
+                main_form.Invoke(__write_log, "表冗長化処理が完了しました....");
+            });
+        }
+
         //LibraPlusの検査結果一覧表を書式設定する（LibraPlus全検査結果レポートフォーマット）
         public async Task lpReportFormat()
         {
@@ -141,6 +277,7 @@ namespace LPRepo
 
                 //罫線描画（処理完了まで待機）
                 tableBorderedAsync().Wait();
+                tableRestruct().Wait();
 
                 //最初のワークシートをアクティブにする
                 initCurrentWorksheet(1);
