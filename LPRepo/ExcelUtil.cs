@@ -146,6 +146,7 @@ namespace LPRepo
             });
         }
 
+        //表の冗長化処理
         private async Task tableRestruct()
         {
             await Task.Run(() =>
@@ -277,6 +278,7 @@ namespace LPRepo
 
                 //罫線描画（処理完了まで待機）
                 tableBorderedAsync().Wait();
+                //表の冗長化処理（処理完了まで待機）
                 tableRestruct().Wait();
 
                 //最初のワークシートをアクティブにする
