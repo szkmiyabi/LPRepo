@@ -175,91 +175,145 @@ namespace LPRepo
                         //行番号セルの処理
                         if (j == 7)
                         {
-                            string cr_sv_row = "";
-                            string inq_sv_row = "";
+                            try
+                            {
+                                string cr_sv_row = "";
+                                string inq_sv_row = "";
 
-                            //数値セルを参照するため処理分岐
-                            Type t = _currentWs.Cell(i, j).Value.GetType();
-                            if (t.Equals(typeof(string)))
-                            {
-                                cr_sv_row = (string)_currentWs.Cell(i, j).Value;
+                                //数値セルを参照するため処理分岐
+                                Type t = _currentWs.Cell(i, j).Value.GetType();
+                                if (t.Equals(typeof(string)))
+                                {
+                                    cr_sv_row = (string)_currentWs.Cell(i, j).Value;
+                                }
+                                else if (t.Equals(typeof(double)))
+                                {
+                                    cr_sv_row = _currentWs.Cell(i, j).Value.ToString();
+                                }
+                                if (cr_sv_row == "〃〃")
+                                {
+                                    inq_sv_row = _currentWs.Cell(i - 1, j).Value.ToString();
+                                    if (mm_sv_row != inq_sv_row) mm_sv_row = inq_sv_row;
+                                    _currentWs.Cell(i, j).Value = mm_sv_row;
+                                }
                             }
-                            else if (t.Equals(typeof(double)))
-                            {
-                                cr_sv_row = _currentWs.Cell(i, j).Value.ToString();
+                            catch(Exception ex) {
+                                main_form.Invoke(__write_log, i + "行目：行番号セルの処理でエラー発生");
+                                _currentWs.Cell(i, j).Value = "〃〃(参照エラー)";
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFF0000);
                             }
-                            if(cr_sv_row == "〃〃")
-                            {
-                                inq_sv_row = _currentWs.Cell(i-1, j).Value.ToString();
-                                if (mm_sv_row != inq_sv_row) mm_sv_row = inq_sv_row;
-                                _currentWs.Cell(i, j).Value = mm_sv_row;
-                            }
+
 
                         }
                         //コメントセルの処理
                         if(j == 8)
                         {
-                            string cr_sv_comment = "";
-                            string inq_sv_comment = "";
-                            cr_sv_comment = (string)_currentWs.Cell(i, j).Value;
-                            if (cr_sv_comment == "〃〃")
+                            try
                             {
-                                inq_sv_comment = _currentWs.Cell(i - 1, j).Value.ToString();
-                                if (mm_sv_comment != inq_sv_comment) mm_sv_comment = inq_sv_comment;
-                                _currentWs.Cell(i, j).Value = mm_sv_comment;
+                                string cr_sv_comment = "";
+                                string inq_sv_comment = "";
+                                cr_sv_comment = (string)_currentWs.Cell(i, j).Value;
+                                if (cr_sv_comment == "〃〃")
+                                {
+                                    inq_sv_comment = _currentWs.Cell(i - 1, j).Value.ToString();
+                                    if (mm_sv_comment != inq_sv_comment) mm_sv_comment = inq_sv_comment;
+                                    _currentWs.Cell(i, j).Value = mm_sv_comment;
+                                }
                             }
+                            catch (Exception ex) {
+                                main_form.Invoke(__write_log, i + "行目：コメントセルの処理でエラー発生");
+                                _currentWs.Cell(i, j).Value = "〃〃(参照エラー)";
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFF0000);
+                            }
+
                         }
                         //対象ソースコードセルの処理
                         if (j == 9)
                         {
-                            string cr_sv_description = "";
-                            string inq_sv_description = "";
-                            cr_sv_description = (string)_currentWs.Cell(i, j).Value;
-                            if (cr_sv_description == "〃〃")
+                            try
                             {
-                                inq_sv_description = _currentWs.Cell(i - 1, j).Value.ToString();
-                                if (mm_sv_description != inq_sv_description) mm_sv_description = inq_sv_description;
-                                _currentWs.Cell(i, j).Value = mm_sv_description;
+                                string cr_sv_description = "";
+                                string inq_sv_description = "";
+                                cr_sv_description = (string)_currentWs.Cell(i, j).Value;
+                                if (cr_sv_description == "〃〃")
+                                {
+                                    inq_sv_description = _currentWs.Cell(i - 1, j).Value.ToString();
+                                    if (mm_sv_description != inq_sv_description) mm_sv_description = inq_sv_description;
+                                    _currentWs.Cell(i, j).Value = mm_sv_description;
+                                }
                             }
+                            catch (Exception ex) {
+                                main_form.Invoke(__write_log, i + "行目：対象ソースコードセルの処理でエラー発生");
+                                _currentWs.Cell(i, j).Value = "〃〃(参照エラー)";
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFF0000);
+                            }
+
                         }
                         //修正ソースコードセルの処理
                         if (j == 10)
                         {
-                            string cr_sv_srccode= "";
-                            string inq_sv_srccode = "";
-                            cr_sv_srccode = (string)_currentWs.Cell(i, j).Value;
-                            if (cr_sv_srccode == "〃〃")
+                            try
                             {
-                                inq_sv_srccode = _currentWs.Cell(i - 1, j).Value.ToString();
-                                if (mm_sv_srccode != inq_sv_srccode) mm_sv_srccode = inq_sv_srccode;
-                                _currentWs.Cell(i, j).Value = mm_sv_srccode;
+                                string cr_sv_srccode = "";
+                                string inq_sv_srccode = "";
+                                cr_sv_srccode = (string)_currentWs.Cell(i, j).Value;
+                                if (cr_sv_srccode == "〃〃")
+                                {
+                                    inq_sv_srccode = _currentWs.Cell(i - 1, j).Value.ToString();
+                                    if (mm_sv_srccode != inq_sv_srccode) mm_sv_srccode = inq_sv_srccode;
+                                    _currentWs.Cell(i, j).Value = mm_sv_srccode;
+                                }
                             }
+                            catch (Exception ex) {
+                                main_form.Invoke(__write_log, i + "行目：修正ソースコードセルの処理でエラー発生");
+                                _currentWs.Cell(i, j).Value = "〃〃(参照エラー)";
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFF0000);
+                            }
+
                         }
                         //登録者セルの処理
                         if (j == 11)
                         {
-                            string cr_sv_register = "";
-                            string inq_sv_register = "";
-                            cr_sv_register = (string)_currentWs.Cell(i, j).Value;
-                            if (cr_sv_register == "〃〃")
+                            try
                             {
-                                inq_sv_register = _currentWs.Cell(i - 1, j).Value.ToString();
-                                if (mm_sv_register != inq_sv_register) mm_sv_register = inq_sv_register;
-                                _currentWs.Cell(i, j).Value = mm_sv_register;
+                                string cr_sv_register = "";
+                                string inq_sv_register = "";
+                                cr_sv_register = (string)_currentWs.Cell(i, j).Value;
+                                if (cr_sv_register == "〃〃")
+                                {
+                                    inq_sv_register = _currentWs.Cell(i - 1, j).Value.ToString();
+                                    if (mm_sv_register != inq_sv_register) mm_sv_register = inq_sv_register;
+                                    _currentWs.Cell(i, j).Value = mm_sv_register;
+                                }
                             }
+                            catch (Exception ex) {
+                                main_form.Invoke(__write_log, i + "行目：登録者セルの処理でエラー発生");
+                                _currentWs.Cell(i, j).Value = "〃〃(参照エラー)";
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFF0000);
+                            }
+
                         }
                         //更新者セルの処理
                         if (j == 12)
                         {
-                            string cr_sv_updater = "";
-                            string inq_sv_updater = "";
-                            cr_sv_updater = (string)_currentWs.Cell(i, j).Value;
-                            if (cr_sv_updater == "〃〃")
+                            try
                             {
-                                inq_sv_updater = _currentWs.Cell(i - 1, j).Value.ToString();
-                                if (mm_sv_updater != inq_sv_updater) mm_sv_updater = inq_sv_updater;
-                                _currentWs.Cell(i, j).Value = mm_sv_updater;
+                                string cr_sv_updater = "";
+                                string inq_sv_updater = "";
+                                cr_sv_updater = (string)_currentWs.Cell(i, j).Value;
+                                if (cr_sv_updater == "〃〃")
+                                {
+                                    inq_sv_updater = _currentWs.Cell(i - 1, j).Value.ToString();
+                                    if (mm_sv_updater != inq_sv_updater) mm_sv_updater = inq_sv_updater;
+                                    _currentWs.Cell(i, j).Value = mm_sv_updater;
+                                }
                             }
+                            catch (Exception ex) {
+                                main_form.Invoke(__write_log, i + "行目：更新者セルの処理でエラー発生");
+                                _currentWs.Cell(i, j).Value = "〃〃(参照エラー)";
+                                _currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFF0000);
+                            }
+
                         }
                     }
                 }
@@ -278,8 +332,7 @@ namespace LPRepo
 
                 //罫線描画（処理完了まで待機）
                 tableBorderedAsync().Wait();
-                //表の冗長化処理（処理完了まで待機）
-                tableRestruct().Wait();
+
 
                 //最初のワークシートをアクティブにする
                 initCurrentWorksheet(1);
@@ -341,6 +394,9 @@ namespace LPRepo
 
                     }
                 }
+
+                //表の冗長化処理（処理完了まで待機）
+                tableRestruct().Wait();
 
                 main_form.Invoke(__write_log, "LibraPlus全検査結果レポートのフォーマット処理が完了しました....");
 
